@@ -4,68 +4,68 @@ import 'package:controle_processual/utils/style_utils.dart';
 class AppColorScheme {
   static final ColorScheme colorScheme = ColorScheme.fromSwatch(
     brightness: Brightness.light,
-    backgroundColor: RadiolifeThemeColors.background,
-    accentColor: RadiolifeThemeColors.accentColor,
-    primarySwatch: RadiolifeThemeColors.primarySwatch,
-    cardColor: RadiolifeThemeColors.backgroundLight,
+    backgroundColor: LocalThemeColors.background,
+    accentColor: LocalThemeColors.accentColor,
+    primarySwatch: LocalThemeColors.primarySwatch,
+    cardColor: LocalThemeColors.backgroundLight,
     errorColor: error,
   );
 
   static const white = Colors.white;
 
-  static MaterialColor get primarySwatch => RadiolifeThemeColors.primarySwatch;
+  static MaterialColor get primarySwatch => LocalThemeColors.primarySwatch;
 
-  static MaterialColor get accentColor => RadiolifeThemeColors.accentColor;
+  static MaterialColor get accentColor => LocalThemeColors.accentColor;
 
-  static Color get background => RadiolifeThemeColors.pinkLightest;
+  static Color get background => LocalThemeColors.pinkLightest;
 
-  static Color get whiteOutline => RadiolifeThemeColors.whiteOutline;
+  static Color get whiteOutline => LocalThemeColors.whiteOutline;
 
-  static Color get darkBlue => RadiolifeThemeColors.darkBlue;
+  static Color get darkBlue => LocalThemeColors.darkBlue;
 
-  static Color get pink => RadiolifeThemeColors.pinkDark;
+  static Color get pink => LocalThemeColors.pinkDark;
 
-  static Color get footer => RadiolifeThemeColors.footer;
+  static Color get footer => LocalThemeColors.footer;
 
-  static Color get success => RadiolifeThemeColors.success;
+  static Color get success => LocalThemeColors.success;
 
-  static Color get error => RadiolifeThemeColors.error;
+  static Color get error => LocalThemeColors.error;
 
-  static Color get textPrimary => RadiolifeThemeColors.textPrimary;
+  static Color get textPrimary => LocalThemeColors.textPrimary;
 
-  static Color get textSecondary => RadiolifeThemeColors.textSecondary;
+  static Color get textSecondary => LocalThemeColors.textSecondary;
 
-  static Color get backgroundLight => RadiolifeThemeColors.backgroundLight;
+  static Color get backgroundLight => LocalThemeColors.backgroundLight;
 
-  static Color get backgroundPink => RadiolifeThemeColors.backgroundPink;
+  static Color get backgroundPink => LocalThemeColors.backgroundPink;
 
-  static Color get backgroundLightPink => RadiolifeThemeColors.backgroundLightPink;
+  static Color get backgroundLightPink => LocalThemeColors.backgroundLightPink;
 
-  static Color get backgroundExtraLightPink => RadiolifeThemeColors.backgroundExtraLightPink;
+  static Color get backgroundExtraLightPink => LocalThemeColors.backgroundExtraLightPink;
 
-  static Color get blueLight => RadiolifeThemeColors.blueLight;
+  static Color get blueLight => LocalThemeColors.blueLight;
 
-  static Color get gray1 => RadiolifeThemeColors.gray1;
+  static Color get gray1 => LocalThemeColors.gray1;
 
   static const lightGray = Color(0xffe4e4e4);
 
-  static Color get yellow => RadiolifeThemeColors.yellow;
+  static Color get yellow => LocalThemeColors.yellow;
 
-  static Color get orange => RadiolifeThemeColors.orange;
+  static Color get orange => LocalThemeColors.orange;
 
-  static Color get pinkDark => RadiolifeThemeColors.pinkDark;
+  static Color get pinkDark => LocalThemeColors.pinkDark;
 
-  static Color get blue => RadiolifeThemeColors.blue;
+  static Color get blue => LocalThemeColors.blue;
 }
 
-class RadiolifeThemeColors {
-  static final MaterialColor primarySwatch = StyleUtils.createMaterialColor(pink);
+class LocalThemeColors {
+  static final MaterialColor primarySwatch = StyleUtils.createMaterialColor(blue);
   static final MaterialColor accentColor = StyleUtils.createMaterialColor(darkBlue);
 
   static const whiteOutline = Color(0xFFFFFFFF);
   static const background = pinkLightest;
   static const darkBlue = Color(0xFF004764);
-  static const blue = Color(0xFF0078A8);
+  static const blue = Color(0xFF71c0e1);
   static const blueLight = Color(0xFFA9E6FF);
   static const pinkDark = Color(0xFFC72E61);
   static const pink = Color(0xFFFA4B86);

@@ -34,7 +34,7 @@ abstract class BaseController extends GetxController {
       snackPosition: SnackPosition.BOTTOM,
       colorText: Colors.white,
       margin: const EdgeInsets.all(16),
-      backgroundColor: RadiolifeThemeColors.error,
+      backgroundColor: LocalThemeColors.error,
       duration: Duration(seconds: 15),
     );
   }
@@ -49,7 +49,7 @@ abstract class BaseController extends GetxController {
       snackPosition: SnackPosition.BOTTOM,
       colorText: Colors.black,
       margin: const EdgeInsets.all(16),
-      backgroundColor: RadiolifeThemeColors.success,
+      backgroundColor: LocalThemeColors.success,
     );
   }
 
@@ -63,7 +63,7 @@ abstract class BaseController extends GetxController {
       snackPosition: SnackPosition.BOTTOM,
       colorText: Colors.black,
       margin: const EdgeInsets.all(16),
-      backgroundColor: RadiolifeThemeColors.yellow,
+      backgroundColor: LocalThemeColors.yellow,
       duration: Duration(seconds: 5),
     );
   }

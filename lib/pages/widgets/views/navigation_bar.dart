@@ -35,7 +35,7 @@ class _NavigationBarState extends State<NavigationBar> {
               child: Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  AppImages.whiteMonoChromeLogoHorizontal,
+                  AppImages.analise,
                   height: 90,
                 ),
               ),

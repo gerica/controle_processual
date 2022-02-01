@@ -16,9 +16,6 @@ class HomePage extends GetView<HomeController> with BasePage {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.end,
-
           children: [
             localNav.NavigationBar(index: KHomeIndex),
             Expanded(child: _buildBody()),
@@ -34,7 +31,7 @@ class HomePage extends GetView<HomeController> with BasePage {
       // height: 100,
       color: AppColorScheme.backgroundExtraLightPink,
       child: const Center(
-        child: Text("Info for radio life"),
+        child: Text("Controle processual"),
       ),
     );
   }

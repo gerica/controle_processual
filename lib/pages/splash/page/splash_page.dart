@@ -62,7 +62,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                       tag: 'logo',
                       child: Container(
                         child: Image.asset(
-                          AppImages.logoVerticalColor,
+                          AppImages.ideia,
                           fit: BoxFit.contain,
                         ),
                         height: _controller.value, // essa linha adiciona a animacao
