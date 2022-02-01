@@ -8,10 +8,7 @@ const KUrlProduction = 'https://api.radiolifelabs.com/';
 // const KUrlProduction = 'http://localhost:4009/';
 
 const KHomeIndex = 0;
-const KExamIndex = 1;
-const KDataScienceIndex = 2;
-const KStatusIndex = 3;
-const KLogoutIndex = 99;
+const KProcesso = 1;
 
 const KSerialNumber = 'Serial Number';
 const KExamNumber = 'Exam Number';

@@ -42,6 +42,7 @@ dependencies:
   universal_html: ^2.0.8
   enum_to_string: ^2.0.1
   yaml: ^3.1.0
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

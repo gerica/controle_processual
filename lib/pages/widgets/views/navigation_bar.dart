@@ -1,3 +1,4 @@
+import 'package:controle_processual/utils/mensagens.dart';
 import 'package:flutter/material.dart';
 import 'package:controle_processual/utils/app_color_scheme.dart';
 import 'package:controle_processual/utils/app_images.dart';
@@ -53,36 +54,15 @@ class _NavigationBarState extends State<NavigationBar> {
                     // Text("Device"),
                     NavigationItem(
                       selected: widget.index == KHomeIndex,
-                      title: 'Home',
+                      title: Mensagnes.instance.textMenuHome,
                       routeName: Routes.home,
                       onHighlight: onHighlight,
                     ),
                     UIHelper.horizontalSpaceLarge,
                     NavigationItem(
-                      selected: widget.index == KExamIndex,
-                      title: 'Exams',
-                      routeName: Routes.exams,
-                      onHighlight: onHighlight,
-                    ),
-                    UIHelper.horizontalSpaceLarge,
-                    NavigationItem(
-                      selected: widget.index == KDataScienceIndex,
-                      title: 'Data Science',
-                      routeName: Routes.dataScience,
-                      onHighlight: onHighlight,
-                    ),
-                    UIHelper.horizontalSpaceLarge,
-                    NavigationItem(
-                      selected: widget.index == KStatusIndex,
-                      title: 'Status',
-                      routeName: Routes.status,
-                      onHighlight: onHighlight,
-                    ),
-                    UIHelper.horizontalSpaceLarge,
-                    NavigationItem(
-                      selected: widget.index == KLogoutIndex,
-                      title: 'Logout',
-                      routeName: Routes.sigin,
+                      selected: widget.index == KProcesso,
+                      title: Mensagnes.instance.textMenuProcesso,
+                      routeName: Routes.processo,
                       onHighlight: onHighlight,
                     ),
                   ],
