@@ -40,7 +40,7 @@ extension PrimaryButtonTypeExtension on PrimaryButtonType {
   double get cornerRadius {
     switch (this) {
       case PrimaryButtonType.circular:
-        return 100;
+        return 50;
       case PrimaryButtonType.rounded:
         return 15;
     }
@@ -96,7 +96,7 @@ class PrimaryButton extends StatelessWidget {
     this.fontSize = 16,
     this.icon,
     this.fontWeight = FontWeight.normal,
-    this.height = 50,
+    this.height = 30,
     this.width = double.infinity,
   });
 

@@ -1,4 +1,7 @@
+import 'package:controle_processual/domain/enum/status.dart';
 import 'package:controle_processual/pages/processo/controller/processo_controller.dart';
+import 'package:controle_processual/pages/widgets/buttons/primary_button.dart';
+import 'package:controle_processual/utils/mensagens.dart';
 import 'package:controle_processual/utils/ui_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,25 +37,13 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
       children: [
         Container(
           width: controller.size.width,
-          color: AppColorScheme.backgroundExtraLightPink,
+          color: AppColorScheme.background,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("opcao 1"),
-                  Row(
-                    children: const [
-                      Text("opcao 2"),
-                      Text("opcao 3"),
-                    ],
-                  ),
-                ],
-              ),
-              UIHelper.dividerDefault,
+              // UIHelper.dividerDefault,
               _buildTitleTable(context),
               UIHelper.dividerDefault,
               _buildTable(context),
@@ -69,11 +60,32 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
     //   title = "Exams of device: ${controller.selected.value.serialNumber}";
     // }
 
-    return Center(
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.headline4,
-      ),
+    return Stack(
+      // mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        ),
+        Positioned(
+          right: 10,
+          top: 10,
+          child: PrimaryButton(
+              width: 100,
+              onPressed: () => controller.addItemDialog(),
+              title: Mensagens.instance.textAddItem,
+              color: PrimaryButtonColor.primary,
+              type: PrimaryButtonType.circular,
+              style: PrimaryButtonStyle.filled,
+              state: Status.success),
+          // child: ElevatedButton(
+          //   onPressed: () => controller.addItemDialog(),
+          //   child: Text(Mensagens.instance.textAddItem),
+          // ),
+        ),
+      ],
     );
   }
 

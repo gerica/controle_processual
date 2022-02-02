@@ -17,7 +17,7 @@ class AppColorScheme {
 
   static MaterialColor get accentColor => LocalThemeColors.accentColor;
 
-  static Color get background => LocalThemeColors.pinkLightest;
+  static Color get background => LocalThemeColors.background;
 
   static Color get whiteOutline => LocalThemeColors.whiteOutline;
 
@@ -37,11 +37,11 @@ class AppColorScheme {
 
   static Color get backgroundLight => LocalThemeColors.backgroundLight;
 
-  static Color get backgroundPink => LocalThemeColors.backgroundPink;
-
-  static Color get backgroundLightPink => LocalThemeColors.backgroundLightPink;
-
-  static Color get backgroundExtraLightPink => LocalThemeColors.backgroundExtraLightPink;
+  // static Color get backgroundPink => LocalThemeColors.backgroundPink;
+  //
+  // static Color get backgroundLightPink => LocalThemeColors.backgroundLightPink;
+  //
+  // static Color get backgroundExtraLightPink => LocalThemeColors.backgroundExtraLightPink;
 
   static Color get blueLight => LocalThemeColors.blueLight;
 
@@ -63,10 +63,11 @@ class LocalThemeColors {
   static final MaterialColor accentColor = StyleUtils.createMaterialColor(darkBlue);
 
   static const whiteOutline = Color(0xFFFFFFFF);
-  static const background = pinkLightest;
+  static const background = backgroundLight;
   static const darkBlue = Color(0xFF004764);
   static const blue = Color(0xFF71c0e1);
   static const blueLight = Color(0xFFA9E6FF);
+  static const blueLightest = Color(0xFFeff8fc);
   static const pinkDark = Color(0xFFC72E61);
   static const pink = Color(0xFFFA4B86);
   static const footer = Color(0xFFC72E61);
@@ -74,10 +75,10 @@ class LocalThemeColors {
   static const gray1 = Color(0xFFA8A8A8);
   static const textSecondary = Color(0xFF7698A4);
   static const backgroundLight = Color(0xFFF1F4F7);
-  static const backgroundPink = Color(0xFFFC95B9);
-  static const pinkLightest = Color(0xFFFFFAFC);
-  static const backgroundLightPink = Color(0xFFFEE6EE);
-  static const backgroundExtraLightPink = Color(0xFFFFF7F8);
+  // static const backgroundPink = Color(0xFFFC95B9);
+  // static const pinkLightest = Color(0xFFFFFAFC);
+  // static const backgroundLightPink = Color(0xFFFEE6EE);
+  // static const backgroundExtraLightPink = Color(0xFFFFF7F8);
   static const success = Color(0xFF00A624);
   static const error = Color(0xFFCF3E5A);
   static const yellow = Color(0xFFFED543);

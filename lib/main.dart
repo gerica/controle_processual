@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:layout/layout.dart';
 import 'package:controle_processual/pages/splash/page/splash_page.dart';
 import 'package:controle_processual/utils/app_routes.dart';
 import 'package:controle_processual/utils/app_theme_data.dart';
@@ -19,15 +18,13 @@ class MyHttpOverrides extends HttpOverrides {
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(Layout(
-    child: GetMaterialApp(
-      initialBinding: GlobalBindings(),
-      title: 'Radiolife',
-      theme: AppThemeData.themeDataLight,
-      darkTheme: AppThemeData.themeDataLight,
-      home: SplashPage(),
-      getPages: AppRoutes.routes,
-      // initialRoute: Routes.signUp,
-    ),
+  runApp(GetMaterialApp(
+    initialBinding: GlobalBindings(),
+    title: 'Radiolife',
+    theme: AppThemeData.themeDataLight,
+    darkTheme: AppThemeData.themeDataLight,
+    home: SplashPage(),
+    getPages: AppRoutes.routes,
+    // initialRoute: Routes.signUp,
   ));
 }

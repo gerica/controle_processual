@@ -1,10 +1,25 @@
-class Mensagnes {
-  Mensagnes._();
+class Mensagens {
+  Mensagens._();
 
-  static final Mensagnes _instance = Mensagnes._();
+  static final Mensagens _instance = Mensagens._();
 
-  static Mensagnes get instance => _instance;
+  static Mensagens get instance => _instance;
 
   String textMenuHome = 'Incial';
   String textMenuProcesso = 'Processo';
+  String textAddItem = 'Adicionar';
+  String titleAdditem = 'Adicionar Item';
+  String textCidade = 'Cidade';
+  String textNucleo = 'Núcleo';
+  String textDetalhamentoTemaProcesso = 'Detalhamento do Tema do Processo';
+  String textTipo = 'Tipo';
+  String textAcao = 'Ação';
+  String textInicioPrevisto = 'Início Previsto';
+  String textTerminoPrevisto = 'Término Previsto';
+  String textTerminoReal = 'Término Real';
+  String textPrazoEntrega = 'Prazo de Entrega';
+  String textStatus = 'Status';
+  String textObservacao = 'Observação';
+  String textResponsavel = 'Responsável pela Atualização';
+  String textUltimaAtualizacao = 'Data da Última Atualização';
 }

@@ -29,7 +29,8 @@ class InputTextWidget extends StatelessWidget implements FieldWidget {
   final TextInputType? keyboardType;
   final TextAlign? textAlign;
   final EdgeInsets? margin;
-  final double? height;
+  final double height;
+  final double? width;
   final TextCapitalization? textCapitalization;
   final EdgeInsets? padding;
   final FocusNode? focusNode;
@@ -61,7 +62,7 @@ class InputTextWidget extends StatelessWidget implements FieldWidget {
     this.minLines,
     this.background,
     this.hintStyle,
-    this.height,
+    this.height = 40,
     this.maxLength,
     this.maxLines = 1,
     this.borderColor,
@@ -75,14 +76,19 @@ class InputTextWidget extends StatelessWidget implements FieldWidget {
     this.style,
     this.autofocus = false,
     this.textInputAction = TextInputAction.done,
+    this.width = 250,
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => //
-      Container(
-        child: buildTextFieldCore(context),
-      );
+  Widget build(BuildContext context) {
+    //
+    return Container(
+      height: height,
+      width: width,
+      child: buildTextFieldCore(context),
+    );
+  }
 
   TextFormField buildTextFieldCore(BuildContext context) => TextFormField(
         controller: controller,
@@ -130,7 +136,7 @@ class InputTextWidget extends StatelessWidget implements FieldWidget {
           child: prefixIcon,
         ),
         prefixText: prefixText,
-        suffixIconConstraints: BoxConstraints(minHeight: height ?? 50),
+        suffixIconConstraints: BoxConstraints(minHeight: height),
         prefixStyle: prefixStyle,
         errorBorder: _buildInputErrorBorderSide,
         focusedBorder: _buildFocusedBorderSide,

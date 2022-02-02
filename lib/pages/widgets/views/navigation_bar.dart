@@ -54,14 +54,14 @@ class _NavigationBarState extends State<NavigationBar> {
                     // Text("Device"),
                     NavigationItem(
                       selected: widget.index == KHomeIndex,
-                      title: Mensagnes.instance.textMenuHome,
+                      title: Mensagens.instance.textMenuHome,
                       routeName: Routes.home,
                       onHighlight: onHighlight,
                     ),
                     UIHelper.horizontalSpaceLarge,
                     NavigationItem(
                       selected: widget.index == KProcesso,
-                      title: Mensagnes.instance.textMenuProcesso,
+                      title: Mensagens.instance.textMenuProcesso,
                       routeName: Routes.processo,
                       onHighlight: onHighlight,
                     ),

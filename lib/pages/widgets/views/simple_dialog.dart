@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:layout/layout.dart';
 import 'package:controle_processual/domain/enum/status.dart';
 import 'package:controle_processual/pages/widgets/buttons/primary_button.dart';
 import 'package:controle_processual/utils/app_border_radius.dart';
@@ -31,7 +30,7 @@ class AppSimpleDialog extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Container(
-          width: context.breakpoint > LayoutBreakpoint.xs ? 500 : double.infinity,
+          width: double.infinity,
           // width: 300,
           margin: const EdgeInsets.symmetric(horizontal: AppSpacing.medium),
           padding: const EdgeInsets.all(AppSpacing.medium),
