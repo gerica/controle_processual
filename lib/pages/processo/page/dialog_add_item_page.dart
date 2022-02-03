@@ -272,7 +272,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           onPressed: () {
             controller.save();
           },
-          title: "Salvar",
+          title: Mensagens.instance.salvar,
           color: PrimaryButtonColor.primary,
           type: PrimaryButtonType.circular,
           style: PrimaryButtonStyle.filled,
@@ -286,7 +286,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           onPressed: () {
             controller.close();
           },
-          title: "Fechar",
+          title: Mensagens.instance.fechar,
           color: PrimaryButtonColor.error,
           type: PrimaryButtonType.circular,
           style: PrimaryButtonStyle.filled,

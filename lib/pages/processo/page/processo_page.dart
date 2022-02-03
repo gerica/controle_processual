@@ -1,6 +1,7 @@
 import 'package:controle_processual/domain/enum/status.dart';
 import 'package:controle_processual/pages/processo/controller/processo_controller.dart';
 import 'package:controle_processual/pages/widgets/buttons/primary_button.dart';
+import 'package:controle_processual/pages/widgets/views/data_table/row_data_table.dart';
 import 'package:controle_processual/utils/mensagens.dart';
 import 'package:controle_processual/utils/ui_helper.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,9 +12,10 @@ import 'package:controle_processual/pages/base/page/base_page.dart';
 import 'package:controle_processual/pages/widgets/views/navigation_bar.dart' as localNav;
 import 'package:controle_processual/utils/app_color_scheme.dart';
 import 'package:controle_processual/utils/constants.dart';
-import 'package:intl/intl.dart';
 
 class ProcessoPage extends GetView<ProcessoController> with BasePage {
+  final _scrollController = ScrollController(initialScrollOffset: 0.0);
+
   @override
   Widget build(BuildContext context) {
     controller.size = MediaQuery.of(context).size;
@@ -70,6 +72,22 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
           ),
         ),
         Positioned(
+          right: 120,
+          top: 10,
+          child: PrimaryButton(
+              width: 100,
+              onPressed: () => controller.dialogCustomColumns(),
+              title: Mensagens.instance.textColumns,
+              color: PrimaryButtonColor.primary,
+              type: PrimaryButtonType.circular,
+              style: PrimaryButtonStyle.filled,
+              state: Status.success),
+          // child: ElevatedButton(
+          //   onPressed: () => controller.addItemDialog(),
+          //   child: Text(Mensagens.instance.textAddItem),
+          // ),
+        ),
+        Positioned(
           right: 10,
           top: 10,
           child: PrimaryButton(
@@ -90,15 +108,18 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
   }
 
   Widget _buildTable(BuildContext context) {
+    if (controller.dados.value.isEmpty) {
+      return SizedBox.shrink();
+    }
     List<DataColumn> columns = [];
     List<String> columnsName = controller.columnsName;
 
-    for (final name in columnsName) {
+    for (final model in columnsName) {
       columns.add(
         DataColumn(
           // onSort: (columnIndex, ascending) => controller.sortBy(columnIndex, ascending),
           label: Text(
-            name,
+            model,
             style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 11),
           ),
         ),
@@ -106,39 +127,13 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
     }
 
     List<DataRow> rows = [];
+    var rowDataTable = RowDataTable(context: context, onTapItem: (data) => print('ProcessoPage._buildTable: ${data}'));
 
-    print('ProcessoPage._buildTable: ${controller.dados.value}');
     if (controller.dados.value.isNotEmpty) {
       for (final dado in controller.dados.value) {
-        List<DataCell> cells = [];
-        cells.add(
-          DataCell(
-            Text(
-              '${DateFormat('dd/MM/yyyy kk:mm').format(dado.data)}',
-              style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 10),
-            ),
-            onTap: () => print('ProcessoPage._buildTable: '),
-          ),
+        rows.add(
+          DataRow(cells: rowDataTable.mount(data: dado, list: controller.columns.value)),
         );
-        cells.add(
-          DataCell(
-            Text(
-              '${dado.responsavel}',
-              style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 10),
-            ),
-            onTap: () => print('ProcessoPage._buildTable: '),
-          ),
-        );
-        cells.add(
-          DataCell(
-            Text(
-              '${DateFormat('dd/MM/yyyy kk:mm').format(dado.prazo)}',
-              style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 10),
-            ),
-            onTap: () => print('ProcessoPage._buildTable: '),
-          ),
-        );
-        rows.add(DataRow(cells: cells));
       }
     }
 
@@ -152,9 +147,20 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
               color: Colors.grey[100],
               border: Border.all(),
             ),
-            child: DataTable(
-              columns: columns,
-              rows: rows,
+            child: Scrollbar(
+              controller: _scrollController,
+              isAlwaysShown: true,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    columns: columns,
+                    rows: rows,
+                  ),
+                ),
+              ),
             ),
           ),
         ],

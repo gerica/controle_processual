@@ -26,7 +26,7 @@ abstract class BaseController extends GetxController {
 
   snackBarError({String? title, required String msg}) {
     if (title == null) {
-      title = "Error";
+      title = "Erro";
     }
     Get.snackbar(
       title,
@@ -41,7 +41,7 @@ abstract class BaseController extends GetxController {
 
   snackBar({String? title, required String msg}) {
     if (title == null) {
-      title = "Information";
+      title = "Informação";
     }
     Get.snackbar(
       title,

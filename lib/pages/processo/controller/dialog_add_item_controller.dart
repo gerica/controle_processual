@@ -1,6 +1,8 @@
+import 'package:controle_processual/domain/enum/status.dart';
 import 'package:controle_processual/domain/model/processo.dart';
 import 'package:controle_processual/domain/repository/processo_respository.dart';
 import 'package:controle_processual/pages/base/controller/base_controller.dart';
+import 'package:controle_processual/pages/widgets/views/app_ui_block.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -45,9 +47,27 @@ class DialogAddItemController extends BaseController {
   final TextEditingController terminoRealController = TextEditingController();
   final TextEditingController ultimaAtualizacaoController = TextEditingController();
 
-  void close() {
+  @override
+  void onReady() {
+    super.onReady();
+    cidadeController.text = "Cidade";
+    nucleoController.text = "Nucleo";
+    detalhamentoTemaProcessoController.text = "detalhamento";
+    tipoController.text = "tipo";
+    acaoController.text = "Acao";
+    inicioPrevistoController.text = "10/10/2000";
+    terminoPrevistoController.text = "10/10/2000";
+    terminoRealController.text = "10/10/2000";
+    prazoEntregaController.text = "Prazo";
+    statusController.text = "Status";
+    observacaoController.text = "Observacao";
+    responsavelAtualizacaoController.text = "Responsavel";
+    ultimaAtualizacaoController.text = "10/10/2000";
+  }
+
+  void close({Status status = Status.none}) {
     Get.delete<DialogAddItemController>();
-    Get.back();
+    Get.back(result: status);
   }
 
   Future<void> save() async {
@@ -74,7 +94,9 @@ class DialogAddItemController extends BaseController {
           ? DateFormat('MM/dd/yyyy').parse(ultimaAtualizacaoController.text).toLocal()
           : null,
     );
+    AppUIBlock.blockUI(context: Get.context);
     await repository.salvar(processo);
-    close();
+    AppUIBlock.unblock(context: Get.context);
+    close(status: Status.success);
   }
 }

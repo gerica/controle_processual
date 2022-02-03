@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:controle_processual/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:controle_processual/pages/splash/page/splash_page.dart';
@@ -18,6 +20,11 @@ class MyHttpOverrides extends HttpOverrides {
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(GetMaterialApp(
     initialBinding: GlobalBindings(),
     title: 'Radiolife',

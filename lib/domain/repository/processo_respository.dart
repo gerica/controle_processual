@@ -1,9 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:controle_processual/domain/model/processo.dart';
 
-class ProcessoRepository {
+import 'base_repository.dart';
+
+class ProcessoRepository extends BaseRepository {
+  final storeProcessos = FirebaseFirestore.instance.collection('processos');
   Future<void> salvar(Processo processo) async {
-    Future.delayed(Duration(seconds: 1), () {
-      print('ProcessoRepository.salvar: ${processo}');
-    });
+    await storeProcessos.add(processo.toJson());
+
+    // await Future.delayed(Duration(seconds: 1), () {
+    //   print('ProcessoRepository.salvar: ${processo}');
+    // });
+  }
+
+  Future<List<Processo>> recuperarTodos() async {
+    List<Processo> result = [];
+    QuerySnapshot querySnapshot = await storeProcessos.get();
+
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      var pro = querySnapshot.docs[i];
+      result.add(Processo.fromJson(pro.data() as Map<String, dynamic>, pro.id));
+    }
+
+    // final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+    //
+    // allData.forEach((pro) => result.add(Processo.fromJson(pro as Map<String, dynamic>)));
+
+    return result;
   }
 }

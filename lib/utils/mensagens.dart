@@ -8,6 +8,7 @@ class Mensagens {
   String textMenuHome = 'Incial';
   String textMenuProcesso = 'Processo';
   String textAddItem = 'Adicionar';
+  String textColumns = 'Colunas';
   String titleAdditem = 'Adicionar Item';
   String textCidade = 'Cidade';
   String textNucleo = 'Núcleo';
@@ -22,4 +23,10 @@ class Mensagens {
   String textObservacao = 'Observação';
   String textResponsavel = 'Responsável pela Atualização';
   String textUltimaAtualizacao = 'Data da Última Atualização';
+  String sucesso = 'Operação realizada com sucesso';
+  String erro = 'Erro ao processar requisição';
+  String fechar = 'Fechar';
+  String salvar = 'Salvar';
+  String selectAll = 'Habilitar todos';
+  String noSelectAll = 'Não habilitar todos';
 }
