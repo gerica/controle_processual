@@ -22,10 +22,10 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
             localNav.NavigationBar(index: KHomeIndex),
-            Expanded(child: Obx(() => _buildBody(context))),
+            Obx(() => _buildBody(context)),
           ],
         ),
       ),
@@ -33,26 +33,19 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          width: controller.size.width,
-          color: AppColorScheme.background,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // UIHelper.dividerDefault,
-              _buildTitleTable(context),
-              UIHelper.dividerDefault,
-              _buildTable(context),
-            ],
-          ),
-        ),
-      ],
+    return Container(
+      width: controller.size.width,
+      color: AppColorScheme.background,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildTitleTable(context),
+          UIHelper.dividerDefault,
+          _buildTable(context),
+        ],
+      ),
     );
   }
 
@@ -138,32 +131,28 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
     }
 
     return Center(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: Colors.grey[100],
-              border: Border.all(),
-            ),
-            child: Scrollbar(
+      child: Container(
+        margin: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Colors.grey[100],
+          border: Border.all(),
+        ),
+        child: Scrollbar(
+          controller: _scrollController,
+          isAlwaysShown: true,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: SingleChildScrollView(
               controller: _scrollController,
-              isAlwaysShown: true,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: SingleChildScrollView(
-                  controller: _scrollController,
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    columns: columns,
-                    rows: rows,
-                  ),
-                ),
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                columns: columns,
+                rows: rows,
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

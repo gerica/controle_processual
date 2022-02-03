@@ -25,6 +25,7 @@ class _NavigationBarState extends State<NavigationBar> {
     return Container(
       color: AppColorScheme.primarySwatch,
       height: 100.0,
+      width: MediaQuery.of(context).size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.max,
