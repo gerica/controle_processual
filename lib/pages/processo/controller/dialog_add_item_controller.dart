@@ -62,18 +62,22 @@ class DialogAddItemController extends BaseController {
       detalhamentoTemaProcessoController.text = objProcesso.detalhamentoTemaProcesso!;
       tipoController.text = objProcesso.tipo!;
       acaoController.text = objProcesso.tipo!;
-      if (objProcesso.inicioPrevisto != null)
-        inicioPrevistoController.text = DateFormat('MM/dd/yyyy').format(objProcesso.inicioPrevisto!);
-      if (objProcesso.terminoPrevisto != null)
-        terminoPrevistoController.text = DateFormat('MM/dd/yyyy').format(objProcesso.terminoPrevisto!);
-      if (objProcesso.terminoReal != null)
-        terminoRealController.text = DateFormat('MM/dd/yyyy').format(objProcesso.terminoReal!);
+      if (objProcesso.inicioPrevisto != null) {
+        inicioPrevistoController.text = DateFormat('dd/MM/yyyy').format(objProcesso.inicioPrevisto!);
+      }
+      if (objProcesso.terminoPrevisto != null) {
+        terminoPrevistoController.text = DateFormat('dd/MM/yyyy').format(objProcesso.terminoPrevisto!);
+      }
+      if (objProcesso.terminoReal != null) {
+        terminoRealController.text = DateFormat('dd/MM/yyyy').format(objProcesso.terminoReal!);
+      }
       prazoEntregaController.text = objProcesso.prazoEntrega!;
       statusController.text = objProcesso.status!;
       observacaoController.text = objProcesso.observacao!;
       responsavelAtualizacaoController.text = objProcesso.responsavelAtualizacao!;
-      if (objProcesso.ultimaAtualizacao != null)
-        ultimaAtualizacaoController.text = DateFormat('MM/dd/yyyy').format(objProcesso.ultimaAtualizacao!);
+      if (objProcesso.ultimaAtualizacao != null) {
+        ultimaAtualizacaoController.text = DateFormat('dd/MM/yyyy').format(objProcesso.ultimaAtualizacao!);
+      }
     }
   }
 
@@ -94,16 +98,16 @@ class DialogAddItemController extends BaseController {
         status: statusController.text,
         tipo: tipoController.text,
         inicioPrevisto: inicioPrevistoController.text.isNotEmpty
-            ? DateFormat('MM/dd/yyyy').parse(inicioPrevistoController.text)
+            ? DateFormat('dd/MM/yyyy').parse(inicioPrevistoController.text)
             : null,
         terminoPrevisto: terminoPrevistoController.text.isNotEmpty
-            ? DateFormat('MM/dd/yyyy').parse(terminoPrevistoController.text).toLocal()
+            ? DateFormat('dd/MM/yyyy').parse(terminoPrevistoController.text).toLocal()
             : null,
         terminoReal: terminoRealController.text.isNotEmpty
-            ? DateFormat('MM/dd/yyyy').parse(terminoRealController.text).toLocal()
+            ? DateFormat('dd/MM/yyyy').parse(terminoRealController.text).toLocal()
             : null,
         ultimaAtualizacao: ultimaAtualizacaoController.text.isNotEmpty
-            ? DateFormat('MM/dd/yyyy').parse(ultimaAtualizacaoController.text).toLocal()
+            ? DateFormat('dd/MM/yyyy').parse(ultimaAtualizacaoController.text).toLocal()
             : null,
         id: this.processo.value.id);
 
@@ -125,5 +129,16 @@ class DialogAddItemController extends BaseController {
     await repository.finalizar(processo.value);
     AppUIBlock.unblock(context: Get.context);
     close(status: Status.success);
+  }
+
+  void calcularPrazo() {
+    if (terminoPrevistoController.text.isNotEmpty && terminoRealController.text.isNotEmpty) {
+      final difference = DateFormat('dd/MM/yyyy')
+          .parse(terminoPrevistoController.text)
+          .toLocal()
+          .difference(DateFormat('dd/MM/yyyy').parse(terminoRealController.text).toLocal())
+          .inDays;
+      prazoEntregaController.text = '$difference';
+    }
   }
 }

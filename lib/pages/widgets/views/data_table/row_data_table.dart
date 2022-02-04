@@ -15,7 +15,6 @@ class RowDataTable {
 
     for (int x = 0; x < list.length; x++) {
       var item = list[x];
-      print('RowDataTable.mount: ${item.text}');
       if (item.checked) {
         cells.add(_buildItem(data, item));
       }
@@ -37,7 +36,7 @@ class RowDataTable {
   DataCell _rowData(DateTime? date, Processo data) {
     var text = '';
     if (date != null) {
-      text = '${DateFormat('dd/MM/yyyy kk:mm').format(date as DateTime)}';
+      text = '${DateFormat('dd/MM/yyyy').format(date as DateTime)}';
     }
     return DataCell(
       Text(
@@ -63,7 +62,7 @@ class RowDataTable {
       case KAcao:
         return _rowString(data.acao ?? "", data);
       case KInicioPrevito:
-        return _rowData(data.ultimaAtualizacao, data);
+        return _rowData(data.inicioPrevisto, data);
       case KTerminoPrevisto:
         return _rowData(data.terminoPrevisto, data);
       case KTerminoReal:

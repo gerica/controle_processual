@@ -173,6 +173,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
             }
           },
           textInputAction: TextInputAction.next,
+          readOnly: true,
         ),
         UIHelper.verticalSpaceExtraTiny,
         InputTextWidget(
@@ -228,9 +229,11 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
       onTap: () async {
         final result = await showDatePicker(
           context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime(2021),
-          lastDate: DateTime(2030),
+          initialDate: textController.text.isNotEmpty
+              ? DateFormat('dd/MM/yyyy').parse(textController.text).toLocal()
+              : DateTime.now(),
+          firstDate: DateTime(2010),
+          lastDate: DateTime(2050),
           builder: (BuildContext context, Widget? child) {
             return Theme(
               data: ThemeData.light().copyWith(
@@ -246,8 +249,9 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           },
         );
         if (result != null) {
-          final valueDate = DateFormat('MM/dd/yyyy').format(result);
+          final valueDate = DateFormat('dd/MM/yyyy').format(result);
           textController.text = '$valueDate';
+          controller.calcularPrazo();
         }
       },
       child: AbsorbPointer(
