@@ -41,6 +41,13 @@ class CustomColumnsController extends BaseController {
     columns.refresh();
   }
 
+  void changeOrder(CheckBoxModel item, int order) {
+    var itemSelected = columns.firstWhere((check) => check.text == item.text);
+    itemSelected.order = order;
+    orderColumns();
+    columns.refresh();
+  }
+
   void confirm() {
     final anyoneCheck = columns.value.any((element) => element.checked);
     if (!anyoneCheck) {
@@ -64,5 +71,9 @@ class CustomColumnsController extends BaseController {
   void toggleCheckAll(bool? value) {
     checkAll(value);
     columns.value.forEach((element) => element.checked = value);
+  }
+
+  void orderColumns() {
+    columns.value.sort((a, b) => a.order.compareTo(b.order));
   }
 }

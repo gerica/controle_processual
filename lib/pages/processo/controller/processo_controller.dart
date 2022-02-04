@@ -53,19 +53,19 @@ class ProcessoController extends BaseController {
   Future<void> _fetchColumns() async {
     String? columnsStr = await LocalStorage().get(KLocalStorageColumns);
     if (columnsStr == null || columnsStr.isEmpty) {
-      columns.add(CheckBoxModel(text: KCidade, checked: true));
-      columns.add(CheckBoxModel(text: KNucleo, checked: true));
-      columns.add(CheckBoxModel(text: KDetalhamento, checked: true));
-      columns.add(CheckBoxModel(text: KTipo, checked: true));
-      columns.add(CheckBoxModel(text: KAcao, checked: true));
-      columns.add(CheckBoxModel(text: KInicioPrevito, checked: true));
-      columns.add(CheckBoxModel(text: KTerminoPrevisto, checked: true));
-      columns.add(CheckBoxModel(text: KTerminoReal, checked: true));
-      columns.add(CheckBoxModel(text: KPrazoEntrega, checked: true));
-      columns.add(CheckBoxModel(text: KStatus, checked: true));
-      columns.add(CheckBoxModel(text: KObservacao, checked: true));
-      columns.add(CheckBoxModel(text: KResponsavel, checked: true));
-      columns.add(CheckBoxModel(text: KultimaAtualizacao, checked: true));
+      columns.add(CheckBoxModel(text: KCidade, checked: true, order: 1));
+      columns.add(CheckBoxModel(text: KNucleo, checked: true, order: 2));
+      columns.add(CheckBoxModel(text: KDetalhamento, checked: true, order: 3));
+      columns.add(CheckBoxModel(text: KTipo, checked: true, order: 4));
+      columns.add(CheckBoxModel(text: KAcao, checked: true, order: 5));
+      columns.add(CheckBoxModel(text: KInicioPrevito, checked: true, order: 6));
+      columns.add(CheckBoxModel(text: KTerminoPrevisto, checked: true, order: 7));
+      columns.add(CheckBoxModel(text: KTerminoReal, checked: true, order: 8));
+      columns.add(CheckBoxModel(text: KPrazoEntrega, checked: true, order: 9));
+      columns.add(CheckBoxModel(text: KStatus, checked: true, order: 10));
+      columns.add(CheckBoxModel(text: KObservacao, checked: true, order: 11));
+      columns.add(CheckBoxModel(text: KResponsavel, checked: true, order: 12));
+      columns.add(CheckBoxModel(text: KultimaAtualizacao, checked: true, order: 13));
 
       String columnsJson = jsonEncode(columns);
       LocalStorage().save(KLocalStorageColumns, columnsJson);

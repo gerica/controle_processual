@@ -16,7 +16,7 @@ import 'package:controle_processual/utils/ui_helper.dart';
 class CustomColumnsPage extends GetView<CustomColumnsController> with BasePage {
   CustomColumnsPage({Key? key}) : super(key: key);
 
-  Widget build(BuildContext context) {
+  Widget build2(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -32,12 +32,12 @@ class CustomColumnsPage extends GetView<CustomColumnsController> with BasePage {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                _builderHeader(),
+                _buildHeader(),
                 UIHelper.dividerDefault,
                 UIHelper.verticalSpaceSmall,
-                Obx(() => _builderBody(context)),
+                Obx(() => _buildBody(context)),
                 UIHelper.verticalSpaceMedium,
-                _builderButtons(),
+                _buildActions()
               ],
             ),
           ),
@@ -46,7 +46,37 @@ class CustomColumnsPage extends GetView<CustomColumnsController> with BasePage {
     );
   }
 
-  Widget _builderHeader() {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.7,
+          // width: double.infinity,
+          margin: const EdgeInsets.symmetric(horizontal: AppSpacing.medium),
+          padding: const EdgeInsets.all(AppSpacing.medium),
+          decoration: BoxDecoration(
+            borderRadius: AppBorderRadius.medium,
+            color: AppColorScheme.white,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildHeader(),
+              UIHelper.dividerDefault,
+              UIHelper.verticalSpaceSmall,
+              Obx(() => _buildBody(context)),
+              UIHelper.verticalSpaceMedium,
+              _buildActions(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -71,8 +101,15 @@ class CustomColumnsPage extends GetView<CustomColumnsController> with BasePage {
     );
   }
 
-  Widget _builderBody(BuildContext context) {
+  Widget _buildBody(BuildContext context) {
     var list = controller.columns.value;
+    List<Widget> itens = [];
+    itens.add(_buildItemAll());
+    for (CheckBoxModel model in list) {
+      final txtContr = TextEditingController();
+      txtContr.text = '${model.order}';
+      itens.add(_buildItem(model, txtContr));
+    }
 
     return Wrap(
       direction: Axis.horizontal,
@@ -80,25 +117,12 @@ class CustomColumnsPage extends GetView<CustomColumnsController> with BasePage {
       spacing: 10,
       runSpacing: 10,
       children: [
-        CheckboxListTile(
-          title: Text(controller.checkAll.value ? Mensagens.instance.selectAll : Mensagens.instance.noSelectAll),
-          value: controller.checkAll.value,
-          onChanged: (bool? value) {
-            controller.toggleCheckAll(value);
-          },
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: list.length,
-          itemBuilder: (_, int index) {
-            return _checkBoxItem(list[index]);
-          },
-        ),
+        ...itens,
       ],
     );
   }
 
-  Widget _builderButtons() {
+  Widget _buildActions() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -116,6 +140,7 @@ class CustomColumnsPage extends GetView<CustomColumnsController> with BasePage {
             state: Status.success,
           ),
         ),
+        UIHelper.horizontalSpaceSmall,
         Container(
           width: 100,
           child: PrimaryButton(
@@ -133,13 +158,95 @@ class CustomColumnsPage extends GetView<CustomColumnsController> with BasePage {
     );
   }
 
+  Widget _buildItem(CheckBoxModel item, TextEditingController txtContr) {
+    var text = item.text;
+    if (text.length >= 15) {
+      text = '${text.substring(0, 15)}...';
+    }
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: AppBorderRadius.medium,
+        color: AppColorScheme.white,
+        border: Border.all(),
+      ),
+      width: 250,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(text),
+            Row(
+              children: [
+                Container(
+                  // color: Colors.yellow,
+                  width: 40,
+                  height: 30,
+                  child: Focus(
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        fillColor: Colors.white,
+                        border: InputBorder.none,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                        filled: true,
+                        contentPadding: EdgeInsets.only(bottom: 20.0, left: 10.0, right: 10.0),
+                      ),
+                      controller: txtContr,
+                    ),
+                    onFocusChange: (hasFocus) {
+                      if (!hasFocus) {
+                        if (txtContr.text != null) {
+                          controller.changeOrder(item, int.parse(txtContr.text));
+                        }
+                      }
+                    },
+                  ),
+                ),
+                _checkBoxItem(item),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _checkBoxItem(CheckBoxModel item) {
-    return CheckboxListTile(
-      title: Text(item.text),
+    return Checkbox(
+      // title:
       value: item.checked,
       onChanged: (bool? value) {
         controller.changeCheck(item);
       },
+    );
+  }
+
+  Widget _buildItemAll() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: AppBorderRadius.medium,
+        color: AppColorScheme.white,
+        border: Border.all(),
+      ),
+      width: 250,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(controller.checkAll.value ? Mensagens.instance.selectAll : Mensagens.instance.noSelectAll),
+            Checkbox(
+              value: controller.checkAll.value,
+              onChanged: (bool? value) {
+                controller.toggleCheckAll(value);
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
