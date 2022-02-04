@@ -139,6 +139,8 @@ class DialogAddItemController extends BaseController {
           .difference(DateFormat('dd/MM/yyyy').parse(terminoRealController.text).toLocal())
           .inDays;
       prazoEntregaController.text = '$difference';
+    } else {
+      prazoEntregaController.clear();
     }
   }
 }

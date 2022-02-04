@@ -31,4 +31,5 @@ class Mensagens {
   String finalizar = 'Finalizar';
   String selectAll = 'Habilitar todos';
   String noSelectAll = 'Não habilitar todos';
+  String cancelar = 'Cancelar';
 }

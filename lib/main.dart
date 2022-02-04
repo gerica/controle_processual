@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:controle_processual/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:controle_processual/pages/splash/page/splash_page.dart';
 import 'package:controle_processual/utils/app_routes.dart';
@@ -27,6 +28,10 @@ void main() async {
 
   runApp(GetMaterialApp(
     initialBinding: GlobalBindings(),
+    localizationsDelegates: GlobalMaterialLocalizations.delegates,
+    supportedLocales: const [
+      Locale('pt', 'BR'), // Hebrew
+    ],
     title: 'Radiolife',
     theme: AppThemeData.themeDataLight,
     darkTheme: AppThemeData.themeDataLight,

@@ -234,6 +234,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
               : DateTime.now(),
           firstDate: DateTime(2010),
           lastDate: DateTime(2050),
+          // locale: const Locale("br", "PT"),
           builder: (BuildContext context, Widget? child) {
             return Theme(
               data: ThemeData.light().copyWith(
@@ -251,10 +252,13 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
         if (result != null) {
           final valueDate = DateFormat('dd/MM/yyyy').format(result);
           textController.text = '$valueDate';
-          controller.calcularPrazo();
+        } else {
+          textController.clear();
         }
+        controller.calcularPrazo();
       },
       child: AbsorbPointer(
+        // child: Container(),
         child: InputTextWidget(
           hintText: text,
           onFieldSubmitted: () {},
@@ -264,7 +268,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           controller: textController,
           suffixIcon: const Icon(
             Icons.date_range_outlined,
-            size: 30,
+            size: 25,
           ),
         ),
       ),
