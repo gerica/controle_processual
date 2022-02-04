@@ -287,6 +287,17 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
       itens.add(PrimaryButton(
           width: 100,
           onPressed: () {
+            controller.finalizar();
+          },
+          title: Mensagens.instance.finalizar,
+          color: PrimaryButtonColor.primary,
+          type: PrimaryButtonType.circular,
+          style: PrimaryButtonStyle.filled,
+          state: Status.success));
+      itens.add(SizedBox(width: 10));
+      itens.add(PrimaryButton(
+          width: 100,
+          onPressed: () {
             controller.delete();
           },
           title: Mensagens.instance.apagar,

@@ -119,4 +119,11 @@ class DialogAddItemController extends BaseController {
     AppUIBlock.unblock(context: Get.context);
     close(status: Status.success);
   }
+
+  Future<void> finalizar() async {
+    AppUIBlock.blockUI(context: Get.context);
+    await repository.finalizar(processo.value);
+    AppUIBlock.unblock(context: Get.context);
+    close(status: Status.success);
+  }
 }

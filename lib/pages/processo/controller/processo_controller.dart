@@ -6,6 +6,7 @@ import 'package:controle_processual/domain/model/processo.dart';
 import 'package:controle_processual/domain/repository/processo_respository.dart';
 import 'package:controle_processual/pages/processo/controller/dialog_add_item_controller.dart';
 import 'package:controle_processual/pages/processo/page/dialog_add_item_page.dart';
+import 'package:controle_processual/pages/widgets/views/app_ui_block.dart';
 import 'package:controle_processual/pages/widgets/views/data_table/custom_columns_controller.dart';
 import 'package:controle_processual/pages/widgets/views/data_table/custom_columns_page.dart';
 import 'package:controle_processual/utils/constants.dart';
@@ -33,13 +34,10 @@ class ProcessoController extends BaseController {
 
   Future<void> _recupear() async {
     dados.clear();
-    final result = await repository.recuperarTodos();
-    print('ProcessoController.recupear: ${result.length}');
-    // Future.delayed(Duration(seconds: 1), () {
-    //   print('recuperar apos um tempo');
-    // dados.add(Processo(data: DateTime.now(), responsavel: 'Rogério Cardoso', prazo: DateTime.now()));
-    // });
+    AppUIBlock.blockUI(context: Get.context);
+    final result = await repository.recuperarAtivos();
     dados.addAll(result);
+    AppUIBlock.unblock(context: Get.context);
   }
 
   List<String> get columnsName {
@@ -81,15 +79,20 @@ class ProcessoController extends BaseController {
   }
 
   Future<void> addItemDialog(Processo? processo) async {
-    // AppUIBlock.unblock(context: Get.context);
-    await DialogAddItemController.to;
+    if (Get.isSnackbarOpen) {
+      print('ProcessoController.addItemDialog: snackbar open');
+      // AppUIBlock.unblock(context: Get.context);
+      Get.back();
+    }
+
+    DialogAddItemController.to;
 
     final result = await Get.appDialog(
       pageChild: DialogAddItemPage(processo),
     );
     if (result == Status.success) {
-      await _recupear();
       snackBar(msg: Mensagens.instance.sucesso);
+      await _recupear();
     } else if (result == Status.failed) {
       snackBarError(msg: Mensagens.instance.erro);
     }

@@ -40,9 +40,7 @@ abstract class BaseController extends GetxController {
   }
 
   snackBar({String? title, required String msg}) {
-    if (title == null) {
-      title = "Informação";
-    }
+    title ??= "Informação";
     Get.snackbar(
       title,
       msg,
@@ -50,6 +48,9 @@ abstract class BaseController extends GetxController {
       colorText: Colors.black,
       margin: const EdgeInsets.all(16),
       backgroundColor: LocalThemeColors.success,
+      maxWidth: 300,
+      // forwardAnimationCurve: Curves.easeIn,
+      // reverseAnimationCurve: Curves.easeOut,
     );
   }
 

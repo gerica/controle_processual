@@ -15,6 +15,8 @@ class Processo {
   DateTime? terminoPrevisto;
   DateTime? terminoReal;
   DateTime? ultimaAtualizacao;
+  bool deleted = false;
+  bool completed = false;
 
   Processo.empty();
 
@@ -82,5 +84,7 @@ class Processo {
         'terminoPrevisto': terminoPrevisto,
         'terminoReal': terminoReal,
         'ultimaAtualizacao': ultimaAtualizacao,
+        'deleted': deleted,
+        'completed': completed,
       };
 }

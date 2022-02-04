@@ -99,7 +99,7 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
 
   Widget _buildTable(BuildContext context) {
     if (controller.dados.value.isEmpty) {
-      return SizedBox.shrink();
+      return Center(child: Text("Nenhum processo cadastrado"));
     }
     List<DataColumn> columns = [];
     List<String> columnsName = controller.columnsName;

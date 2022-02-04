@@ -54,7 +54,7 @@ class CustomColumnsPage extends GetView<CustomColumnsController> with BasePage {
           width: 40,
         ),
         const Text(
-          'Columns',
+          'Colunas',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black, fontSize: AppFontSize.medium, fontWeight: AppFontWeight.bold),
         ),
@@ -74,7 +74,11 @@ class CustomColumnsPage extends GetView<CustomColumnsController> with BasePage {
   Widget _builderBody(BuildContext context) {
     var list = controller.columns.value;
 
-    return Column(
+    return Wrap(
+      direction: Axis.horizontal,
+      alignment: WrapAlignment.start,
+      spacing: 10,
+      runSpacing: 10,
       children: [
         CheckboxListTile(
           title: Text(controller.checkAll.value ? Mensagens.instance.selectAll : Mensagens.instance.noSelectAll),
