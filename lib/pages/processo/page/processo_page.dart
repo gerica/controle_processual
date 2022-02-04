@@ -41,6 +41,7 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          UIHelper.dividerDefault,
           _buildTitleTable(context),
           UIHelper.dividerDefault,
           _buildTable(context),
@@ -51,12 +52,8 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
 
   Widget _buildTitleTable(BuildContext context) {
     var title = "Controle Processual";
-    // if (controller.selected.value.id != null) {
-    //   title = "Exams of device: ${controller.selected.value.serialNumber}";
-    // }
 
     return Stack(
-      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Center(
           child: Text(
@@ -85,7 +82,7 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
           top: 10,
           child: PrimaryButton(
               width: 100,
-              onPressed: () => controller.addItemDialog(),
+              onPressed: () => controller.addItemDialog(null),
               title: Mensagens.instance.textAddItem,
               color: PrimaryButtonColor.primary,
               type: PrimaryButtonType.circular,
@@ -120,7 +117,10 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
     }
 
     List<DataRow> rows = [];
-    var rowDataTable = RowDataTable(context: context, onTapItem: (data) => print('ProcessoPage._buildTable: ${data}'));
+    var rowDataTable = RowDataTable(
+      context: context,
+      onTapItem: (data) => controller.addItemDialog(data),
+    );
 
     if (controller.dados.value.isNotEmpty) {
       for (final dado in controller.dados.value) {

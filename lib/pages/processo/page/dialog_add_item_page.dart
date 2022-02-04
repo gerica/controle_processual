@@ -1,4 +1,5 @@
 import 'package:controle_processual/domain/enum/status.dart';
+import 'package:controle_processual/domain/model/processo.dart';
 import 'package:controle_processual/pages/base/page/base_page.dart';
 import 'package:controle_processual/pages/processo/controller/dialog_add_item_controller.dart';
 import 'package:controle_processual/pages/widgets/buttons/primary_button.dart';
@@ -18,7 +19,9 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
   // final VoidCallback? onClosePressed;
   // final ValueSetter<dynamic>? onOkPressed;
 
-  const DialogAddItemPage();
+  DialogAddItemPage(Processo? processo) {
+    controller.processo(processo);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +54,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
                   ),
                   IconButton(
                     onPressed: () {
+                      DialogAddItemController.to;
                       controller.close();
                     },
                     icon: const Icon(
@@ -278,12 +282,26 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           style: PrimaryButtonStyle.filled,
           state: Status.success),
     );
+    if (controller.processo.value.id != null) {
+      itens.add(SizedBox(width: 10));
+      itens.add(PrimaryButton(
+          width: 100,
+          onPressed: () {
+            controller.delete();
+          },
+          title: Mensagens.instance.apagar,
+          color: PrimaryButtonColor.secondary,
+          type: PrimaryButtonType.circular,
+          style: PrimaryButtonStyle.filled,
+          state: Status.success));
+    }
 
     itens.add(SizedBox(width: 10));
     itens.add(
       PrimaryButton(
           width: 100,
           onPressed: () {
+            DialogAddItemController.to;
             controller.close();
           },
           title: Mensagens.instance.fechar,

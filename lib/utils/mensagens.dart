@@ -26,6 +26,7 @@ class Mensagens {
   String sucesso = 'Operação realizada com sucesso';
   String erro = 'Erro ao processar requisição';
   String fechar = 'Fechar';
+  String apagar = 'Apagar';
   String salvar = 'Salvar';
   String selectAll = 'Habilitar todos';
   String noSelectAll = 'Não habilitar todos';

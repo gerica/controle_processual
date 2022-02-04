@@ -16,6 +16,8 @@ class Processo {
   DateTime? terminoReal;
   DateTime? ultimaAtualizacao;
 
+  Processo.empty();
+
   Processo(
       {required this.cidade,
       required this.nucleo,
@@ -29,7 +31,8 @@ class Processo {
       required this.inicioPrevisto,
       required this.terminoPrevisto,
       required this.terminoReal,
-      required this.ultimaAtualizacao});
+      required this.ultimaAtualizacao,
+      this.id});
 
   Processo.fromJson(Map<String, dynamic> parsedJson, String idDoc) {
     id = idDoc;

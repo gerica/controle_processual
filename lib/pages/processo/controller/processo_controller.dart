@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:controle_processual/domain/enum/status.dart';
 import 'package:controle_processual/domain/model/checkbox_model.dart';
+import 'package:controle_processual/domain/model/processo.dart';
 import 'package:controle_processual/domain/repository/processo_respository.dart';
 import 'package:controle_processual/pages/processo/controller/dialog_add_item_controller.dart';
 import 'package:controle_processual/pages/processo/page/dialog_add_item_page.dart';
@@ -39,30 +40,6 @@ class ProcessoController extends BaseController {
     // dados.add(Processo(data: DateTime.now(), responsavel: 'Rogério Cardoso', prazo: DateTime.now()));
     // });
     dados.addAll(result);
-  }
-
-  List<CheckBoxModel> getColumnsName() {
-    List<CheckBoxModel> result = [
-      CheckBoxModel(text: KCidade, checked: true),
-      CheckBoxModel(text: KNucleo, checked: true),
-      CheckBoxModel(text: KDetalhamento, checked: true),
-      CheckBoxModel(text: KTipo, checked: true),
-      CheckBoxModel(text: KAcao, checked: true),
-      CheckBoxModel(text: KInicioPrevito, checked: true),
-      CheckBoxModel(text: KTerminoPrevisto, checked: true),
-      CheckBoxModel(text: KTerminoReal, checked: true),
-      CheckBoxModel(text: KPrazoEntrega, checked: true),
-      CheckBoxModel(text: KStatus, checked: true),
-      CheckBoxModel(text: KObservacao, checked: true),
-      CheckBoxModel(text: KResponsavel, checked: true),
-      CheckBoxModel(text: KultimaAtualizacao, checked: true),
-    ];
-    // columns.value.forEach((col) {
-    //   if (col.checked) {
-    //     result.add(col.text);
-    //   }
-    // });
-    return result;
   }
 
   List<String> get columnsName {
@@ -103,11 +80,12 @@ class ProcessoController extends BaseController {
     }
   }
 
-  Future<void> addItemDialog() async {
-    DialogAddItemController.to;
+  Future<void> addItemDialog(Processo? processo) async {
+    // AppUIBlock.unblock(context: Get.context);
+    await DialogAddItemController.to;
 
     final result = await Get.appDialog(
-      pageChild: DialogAddItemPage(),
+      pageChild: DialogAddItemPage(processo),
     );
     if (result == Status.success) {
       await _recupear();

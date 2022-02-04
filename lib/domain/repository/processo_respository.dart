@@ -5,8 +5,13 @@ import 'base_repository.dart';
 
 class ProcessoRepository extends BaseRepository {
   final storeProcessos = FirebaseFirestore.instance.collection('processos');
+
   Future<void> salvar(Processo processo) async {
-    await storeProcessos.add(processo.toJson());
+    if (processo.id == null) {
+      await storeProcessos.add(processo.toJson());
+    } else {
+      await storeProcessos.doc(processo.id).update(processo.toJson());
+    }
 
     // await Future.delayed(Duration(seconds: 1), () {
     //   print('ProcessoRepository.salvar: ${processo}');
@@ -27,5 +32,9 @@ class ProcessoRepository extends BaseRepository {
     // allData.forEach((pro) => result.add(Processo.fromJson(pro as Map<String, dynamic>)));
 
     return result;
+  }
+
+  Future<void> delete(Processo processo) async {
+    await storeProcessos.doc(processo.id).delete();
   }
 }

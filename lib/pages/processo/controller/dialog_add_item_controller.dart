@@ -13,6 +13,7 @@ class DialogAddItemController extends BaseController {
       : Get.put(DialogAddItemController());
 
   final repository = ProcessoRepository();
+  final processo = Processo.empty().obs;
 
   final TextEditingController cidadeController = TextEditingController();
   final FocusNode cidadeFocus = FocusNode();
@@ -50,19 +51,30 @@ class DialogAddItemController extends BaseController {
   @override
   void onReady() {
     super.onReady();
-    cidadeController.text = "Cidade";
-    nucleoController.text = "Nucleo";
-    detalhamentoTemaProcessoController.text = "detalhamento";
-    tipoController.text = "tipo";
-    acaoController.text = "Acao";
-    inicioPrevistoController.text = "10/10/2000";
-    terminoPrevistoController.text = "10/10/2000";
-    terminoRealController.text = "10/10/2000";
-    prazoEntregaController.text = "Prazo";
-    statusController.text = "Status";
-    observacaoController.text = "Observacao";
-    responsavelAtualizacaoController.text = "Responsavel";
-    ultimaAtualizacaoController.text = "10/10/2000";
+    initCampos();
+  }
+
+  initCampos() {
+    if (processo.value != null) {
+      var objProcesso = processo.value;
+      cidadeController.text = objProcesso.cidade!;
+      nucleoController.text = objProcesso.nucleo!;
+      detalhamentoTemaProcessoController.text = objProcesso.detalhamentoTemaProcesso!;
+      tipoController.text = objProcesso.tipo!;
+      acaoController.text = objProcesso.tipo!;
+      if (objProcesso.inicioPrevisto != null)
+        inicioPrevistoController.text = DateFormat('MM/dd/yyyy').format(objProcesso.inicioPrevisto!);
+      if (objProcesso.terminoPrevisto != null)
+        terminoPrevistoController.text = DateFormat('MM/dd/yyyy').format(objProcesso.terminoPrevisto!);
+      if (objProcesso.terminoReal != null)
+        terminoRealController.text = DateFormat('MM/dd/yyyy').format(objProcesso.terminoReal!);
+      prazoEntregaController.text = objProcesso.prazoEntrega!;
+      statusController.text = objProcesso.status!;
+      observacaoController.text = objProcesso.observacao!;
+      responsavelAtualizacaoController.text = objProcesso.responsavelAtualizacao!;
+      if (objProcesso.ultimaAtualizacao != null)
+        ultimaAtualizacaoController.text = DateFormat('MM/dd/yyyy').format(objProcesso.ultimaAtualizacao!);
+    }
   }
 
   void close({Status status = Status.none}) {
@@ -72,30 +84,38 @@ class DialogAddItemController extends BaseController {
 
   Future<void> save() async {
     final processo = Processo(
-      acao: acaoController.text,
-      detalhamentoTemaProcesso: detalhamentoTemaProcessoController.text,
-      nucleo: nucleoController.text,
-      cidade: cidadeController.text,
-      observacao: observacaoController.text,
-      prazoEntrega: prazoEntregaController.text,
-      responsavelAtualizacao: responsavelAtualizacaoController.text,
-      status: statusController.text,
-      tipo: tipoController.text,
-      inicioPrevisto: inicioPrevistoController.text.isNotEmpty
-          ? DateFormat('MM/dd/yyyy').parse(inicioPrevistoController.text)
-          : null,
-      terminoPrevisto: terminoPrevistoController.text.isNotEmpty
-          ? DateFormat('MM/dd/yyyy').parse(terminoPrevistoController.text).toLocal()
-          : null,
-      terminoReal: terminoRealController.text.isNotEmpty
-          ? DateFormat('MM/dd/yyyy').parse(terminoRealController.text).toLocal()
-          : null,
-      ultimaAtualizacao: ultimaAtualizacaoController.text.isNotEmpty
-          ? DateFormat('MM/dd/yyyy').parse(ultimaAtualizacaoController.text).toLocal()
-          : null,
-    );
+        acao: acaoController.text,
+        detalhamentoTemaProcesso: detalhamentoTemaProcessoController.text,
+        nucleo: nucleoController.text,
+        cidade: cidadeController.text,
+        observacao: observacaoController.text,
+        prazoEntrega: prazoEntregaController.text,
+        responsavelAtualizacao: responsavelAtualizacaoController.text,
+        status: statusController.text,
+        tipo: tipoController.text,
+        inicioPrevisto: inicioPrevistoController.text.isNotEmpty
+            ? DateFormat('MM/dd/yyyy').parse(inicioPrevistoController.text)
+            : null,
+        terminoPrevisto: terminoPrevistoController.text.isNotEmpty
+            ? DateFormat('MM/dd/yyyy').parse(terminoPrevistoController.text).toLocal()
+            : null,
+        terminoReal: terminoRealController.text.isNotEmpty
+            ? DateFormat('MM/dd/yyyy').parse(terminoRealController.text).toLocal()
+            : null,
+        ultimaAtualizacao: ultimaAtualizacaoController.text.isNotEmpty
+            ? DateFormat('MM/dd/yyyy').parse(ultimaAtualizacaoController.text).toLocal()
+            : null,
+        id: this.processo.value.id);
+
     AppUIBlock.blockUI(context: Get.context);
     await repository.salvar(processo);
+    AppUIBlock.unblock(context: Get.context);
+    close(status: Status.success);
+  }
+
+  Future<void> delete() async {
+    AppUIBlock.blockUI(context: Get.context);
+    await repository.delete(processo.value);
     AppUIBlock.unblock(context: Get.context);
     close(status: Status.success);
   }

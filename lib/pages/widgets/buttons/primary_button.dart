@@ -16,7 +16,7 @@ extension PrimaryButtonColorExtension on PrimaryButtonColor {
       case PrimaryButtonColor.primary:
         return AppColorScheme.primarySwatch;
       case PrimaryButtonColor.secondary:
-        return AppColorScheme.blue;
+        return AppColorScheme.yellow;
     }
   }
 
@@ -29,7 +29,7 @@ extension PrimaryButtonColorExtension on PrimaryButtonColor {
       case PrimaryButtonColor.primary:
         return AppColorScheme.primarySwatch;
       case PrimaryButtonColor.secondary:
-        return AppColorScheme.blue;
+        return AppColorScheme.yellow;
     }
   }
 }
