@@ -61,7 +61,7 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
             style: Theme.of(context).textTheme.headline4,
           ),
         ),
-        ..._buildActions()
+        _buildActions()
       ],
     );
   }
@@ -142,50 +142,45 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
     );
   }
 
-  List<Widget> _buildActions() {
-    List<Widget> result = [];
-    result.add(
-      Positioned(
-        right: 90,
+  Widget _buildActions() {
+    return Positioned(
+        right: 10,
         top: 10,
-        child: PrimaryButtonIcon(
-            onPressed: () => controller.dialogCustomColumns(),
-            icon: Tooltip(
-              child: const Icon(Icons.view_column, color: Colors.white),
-              message: Mensagens.instance.textColumns,
+        child: Row(
+          children: [
+            PrimaryButtonIcon(
+              onPressed: () => controller.dialogCustomColumns(),
+              icon: Tooltip(
+                child: const Icon(Icons.view_column, color: Colors.white),
+                message: Mensagens.instance.textColumns,
+              ),
+              color: PrimaryButtonColor.primary,
+              type: PrimaryButtonType.circular,
+              style: PrimaryButtonStyle.filled,
             ),
-            color: PrimaryButtonColor.primary,
-            type: PrimaryButtonType.circular,
-            style: PrimaryButtonStyle.filled),
-      ),
-    );
-    result.add(Positioned(
-      right: 50,
-      top: 10,
-      child: PrimaryButtonIcon(
-          onPressed: () => controller.addItemDialog(null),
-          icon: Tooltip(
-            child: const Icon(Icons.add, color: Colors.white),
-            message: Mensagens.instance.textAddItem,
-          ),
-          color: PrimaryButtonColor.primary,
-          type: PrimaryButtonType.circular,
-          style: PrimaryButtonStyle.filled),
-    ));
-    result.add(Positioned(
-      right: 10,
-      top: 10,
-      child: PrimaryButtonIcon(
-        onPressed: () => controller.download(),
-        icon: Tooltip(
-          child: const Icon(Icons.download, color: Colors.white),
-          message: Mensagens.instance.downlaod,
-        ),
-        color: PrimaryButtonColor.primary,
-        type: PrimaryButtonType.circular,
-        style: PrimaryButtonStyle.filled,
-      ),
-    ));
-    return result;
+            UIHelper.horizontalSpaceExtraTiny,
+            PrimaryButtonIcon(
+              onPressed: () => controller.addItemDialog(null),
+              icon: Tooltip(
+                child: const Icon(Icons.add, color: Colors.white),
+                message: Mensagens.instance.textAddItem,
+              ),
+              color: PrimaryButtonColor.primary,
+              type: PrimaryButtonType.circular,
+              style: PrimaryButtonStyle.filled,
+            ),
+            UIHelper.horizontalSpaceExtraTiny,
+            PrimaryButtonIcon(
+              onPressed: () => controller.download(),
+              icon: Tooltip(
+                child: const Icon(Icons.download, color: Colors.white),
+                message: Mensagens.instance.downlaod,
+              ),
+              color: PrimaryButtonColor.primary,
+              type: PrimaryButtonType.circular,
+              style: PrimaryButtonStyle.filled,
+            ),
+          ],
+        ));
   }
 }
