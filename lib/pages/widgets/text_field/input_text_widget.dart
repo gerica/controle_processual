@@ -29,7 +29,7 @@ class InputTextWidget extends StatelessWidget implements FieldWidget {
   final TextAlign? textAlign;
   final EdgeInsets? margin;
   final double height;
-  final double width;
+  double? width;
   final TextCapitalization? textCapitalization;
   final EdgeInsets? padding;
   final FocusNode? focusNode;
@@ -43,7 +43,7 @@ class InputTextWidget extends StatelessWidget implements FieldWidget {
   final Color? borderColor;
   final TextInputAction textInputAction;
 
-  const InputTextWidget({
+  InputTextWidget({
     required this.onFieldSubmitted,
     required this.controller,
     this.errorText,
@@ -61,7 +61,6 @@ class InputTextWidget extends StatelessWidget implements FieldWidget {
     this.minLines,
     this.background,
     this.hintStyle,
-    this.height = 40,
     this.maxLength,
     this.maxLines = 1,
     this.borderColor,
@@ -75,13 +74,17 @@ class InputTextWidget extends StatelessWidget implements FieldWidget {
     this.style,
     this.autofocus = false,
     this.textInputAction = TextInputAction.done,
-    this.width = 250,
+    this.height = 40,
+    this.width,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     //
+    if (this.width == null) {
+      this.width = MediaQuery.of(context).size.width * 0.22;
+    }
     return Container(
       height: height,
       width: width,

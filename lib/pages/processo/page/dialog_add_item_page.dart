@@ -108,21 +108,6 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           textInputAction: TextInputAction.next,
         ),
         InputTextWidget(
-          hintText: Mensagens.instance.textDetalhamentoTemaProcesso,
-          textCapitalization: TextCapitalization.words,
-          controller: controller.detalhamentoTemaProcessoController,
-          errorText: controller.detalhamentoTemaProcessoError.value == ''
-              ? null
-              : controller.detalhamentoTemaProcessoError.value,
-          focusNode: controller.detalhamentoTemaProcessoFocus,
-          onFieldSubmitted: () {
-            if (controller.detalhamentoTemaProcessoError.value.isNotEmpty) {
-              controller.detalhamentoTemaProcessoError('');
-            }
-          },
-          textInputAction: TextInputAction.next,
-        ),
-        InputTextWidget(
           hintText: Mensagens.instance.textTipo,
           textCapitalization: TextCapitalization.words,
           controller: controller.tipoController,
@@ -166,32 +151,6 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           readOnly: true,
         ),
         _buildItemStatus(context),
-        // InputTextWidget(
-        //   hintText: Mensagens.instance.textStatus,
-        //   textCapitalization: TextCapitalization.words,
-        //   controller: controller.statusController,
-        //   errorText: controller.statusError.value == '' ? null : controller.statusError.value,
-        //   focusNode: controller.statusFocus,
-        //   onFieldSubmitted: () {
-        //     if (controller.statusError.value.isNotEmpty) {
-        //       controller.statusError('');
-        //     }
-        //   },
-        //   textInputAction: TextInputAction.next,
-        // ),
-        InputTextWidget(
-          hintText: Mensagens.instance.textObservacao,
-          textCapitalization: TextCapitalization.words,
-          controller: controller.observacaoController,
-          errorText: controller.observacaoError.value == '' ? null : controller.observacaoError.value,
-          focusNode: controller.observacaoFocus,
-          onFieldSubmitted: () {
-            if (controller.observacaoError.value.isNotEmpty) {
-              controller.observacaoError('');
-            }
-          },
-          textInputAction: TextInputAction.next,
-        ),
         InputTextWidget(
           hintText: Mensagens.instance.textResponsavel,
           textCapitalization: TextCapitalization.words,
@@ -207,6 +166,42 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           textInputAction: TextInputAction.next,
         ),
         _buildItemDatePicker(context, controller.ultimaAtualizacaoController, Mensagens.instance.textUltimaAtualizacao),
+        InputTextWidget(
+          hintText: Mensagens.instance.textDetalhamentoTemaProcesso,
+          textCapitalization: TextCapitalization.words,
+          controller: controller.detalhamentoTemaProcessoController,
+          errorText: controller.detalhamentoTemaProcessoError.value == ''
+              ? null
+              : controller.detalhamentoTemaProcessoError.value,
+          focusNode: controller.detalhamentoTemaProcessoFocus,
+          onFieldSubmitted: () {
+            if (controller.detalhamentoTemaProcessoError.value.isNotEmpty) {
+              controller.detalhamentoTemaProcessoError('');
+            }
+          },
+          textInputAction: TextInputAction.next,
+          width: MediaQuery.of(context).size.width * 0.315,
+          height: 80,
+          minLines: 3,
+          maxLines: 10,
+        ),
+        InputTextWidget(
+          hintText: Mensagens.instance.textObservacao,
+          textCapitalization: TextCapitalization.words,
+          controller: controller.observacaoController,
+          errorText: controller.observacaoError.value == '' ? null : controller.observacaoError.value,
+          focusNode: controller.observacaoFocus,
+          onFieldSubmitted: () {
+            if (controller.observacaoError.value.isNotEmpty) {
+              controller.observacaoError('');
+            }
+          },
+          textInputAction: TextInputAction.next,
+          width: MediaQuery.of(context).size.width * 0.35,
+          height: 80,
+          minLines: 3,
+          maxLines: 10,
+        ),
       ],
     );
   }

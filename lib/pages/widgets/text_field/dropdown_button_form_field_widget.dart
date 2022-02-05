@@ -17,14 +17,14 @@ class DropdownButtonFormFieldWidget extends StatelessWidget {
   final TextStyle? prefixStyle;
   final Color? borderColor;
   final double height;
-  final double width;
+  double? width;
   final String? errorText;
   final List<DropdownMenuItem> itens;
   final Function(dynamic) onChanged;
   final dynamic selected;
   final bool isExpanded;
 
-  const DropdownButtonFormFieldWidget({
+  DropdownButtonFormFieldWidget({
     required this.itens,
     required this.onChanged,
     required this.selected,
@@ -40,7 +40,7 @@ class DropdownButtonFormFieldWidget extends StatelessWidget {
     this.prefixStyle,
     this.borderColor,
     this.height = 40,
-    this.width = 250,
+    this.width,
     this.errorText,
     this.isExpanded = true,
     Key? key,
@@ -48,6 +48,7 @@ class DropdownButtonFormFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    this.width = MediaQuery.of(context).size.width * 0.22;
     return Container(
       height: height,
       width: width,
