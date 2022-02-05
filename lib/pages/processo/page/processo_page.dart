@@ -149,6 +149,17 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
         child: Row(
           children: [
             PrimaryButtonIcon(
+              onPressed: () => controller.download(),
+              icon: Tooltip(
+                child: const Icon(Icons.download, color: Colors.white),
+                message: Mensagens.instance.downlaod,
+              ),
+              color: PrimaryButtonColor.primary,
+              type: PrimaryButtonType.circular,
+              style: PrimaryButtonStyle.filled,
+            ),
+            UIHelper.horizontalSpaceExtraTiny,
+            PrimaryButtonIcon(
               onPressed: () => controller.dialogCustomColumns(),
               icon: Tooltip(
                 child: const Icon(Icons.view_column, color: Colors.white),
@@ -164,17 +175,6 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
               icon: Tooltip(
                 child: const Icon(Icons.add, color: Colors.white),
                 message: Mensagens.instance.textAddItem,
-              ),
-              color: PrimaryButtonColor.primary,
-              type: PrimaryButtonType.circular,
-              style: PrimaryButtonStyle.filled,
-            ),
-            UIHelper.horizontalSpaceExtraTiny,
-            PrimaryButtonIcon(
-              onPressed: () => controller.download(),
-              icon: Tooltip(
-                child: const Icon(Icons.download, color: Colors.white),
-                message: Mensagens.instance.downlaod,
               ),
               color: PrimaryButtonColor.primary,
               type: PrimaryButtonType.circular,

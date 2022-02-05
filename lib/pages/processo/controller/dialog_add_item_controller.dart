@@ -34,6 +34,7 @@ class DialogAddItemController extends BaseController {
   final FocusNode prazoEntregaFocus = FocusNode();
   final prazoEntregaError = ''.obs;
   final TextEditingController statusController = TextEditingController();
+
   final FocusNode statusFocus = FocusNode();
   final statusError = ''.obs;
   final TextEditingController observacaoController = TextEditingController();
@@ -47,6 +48,8 @@ class DialogAddItemController extends BaseController {
   final TextEditingController terminoPrevistoController = TextEditingController();
   final TextEditingController terminoRealController = TextEditingController();
   final TextEditingController ultimaAtualizacaoController = TextEditingController();
+
+  List<String> get status => ['Em Andamento', 'Planejado', 'Atrasado', 'Concluído'];
 
   @override
   void onReady() {

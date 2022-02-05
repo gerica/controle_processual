@@ -3,6 +3,7 @@ import 'package:controle_processual/domain/model/processo.dart';
 import 'package:controle_processual/pages/base/page/base_page.dart';
 import 'package:controle_processual/pages/processo/controller/dialog_add_item_controller.dart';
 import 'package:controle_processual/pages/widgets/buttons/primary_button.dart';
+import 'package:controle_processual/pages/widgets/text_field/dropdown_button_form_field_widget.dart';
 import 'package:controle_processual/pages/widgets/text_field/input_text_widget.dart';
 import 'package:controle_processual/utils/app_border_radius.dart';
 import 'package:controle_processual/utils/app_color_scheme.dart';
@@ -164,19 +165,20 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           textInputAction: TextInputAction.next,
           readOnly: true,
         ),
-        InputTextWidget(
-          hintText: Mensagens.instance.textStatus,
-          textCapitalization: TextCapitalization.words,
-          controller: controller.statusController,
-          errorText: controller.statusError.value == '' ? null : controller.statusError.value,
-          focusNode: controller.statusFocus,
-          onFieldSubmitted: () {
-            if (controller.statusError.value.isNotEmpty) {
-              controller.statusError('');
-            }
-          },
-          textInputAction: TextInputAction.next,
-        ),
+        _buildItemStatus(context),
+        // InputTextWidget(
+        //   hintText: Mensagens.instance.textStatus,
+        //   textCapitalization: TextCapitalization.words,
+        //   controller: controller.statusController,
+        //   errorText: controller.statusError.value == '' ? null : controller.statusError.value,
+        //   focusNode: controller.statusFocus,
+        //   onFieldSubmitted: () {
+        //     if (controller.statusError.value.isNotEmpty) {
+        //       controller.statusError('');
+        //     }
+        //   },
+        //   textInputAction: TextInputAction.next,
+        // ),
         InputTextWidget(
           hintText: Mensagens.instance.textObservacao,
           textCapitalization: TextCapitalization.words,
@@ -317,6 +319,27 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: itens,
+    );
+  }
+
+  Widget _buildItemStatus(BuildContext context) {
+    String selected = controller.status[1];
+    if (controller.processo.value != null && controller.processo.value.status != null) {
+      selected = controller.processo.value.status!;
+    }
+    return DropdownButtonFormFieldWidget(
+      hintText: Mensagens.instance.textStatus,
+      selected: selected,
+      borderColor: AppColorScheme.primarySwatch,
+      onChanged: (dynamic newValue) {
+        controller.statusController.text = newValue;
+      },
+      itens: controller.status.map((dynamic value) {
+        return DropdownMenuItem<dynamic>(
+          value: value,
+          child: Text(value ?? ''),
+        );
+      }).toList(),
     );
   }
 }
