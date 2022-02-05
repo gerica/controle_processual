@@ -22,6 +22,9 @@ class ProcessoController extends BaseController {
   late Size size;
   final dados = [].obs;
   final columns = [].obs;
+  final isSorting = false.obs;
+  final sortAscending = false.obs;
+  final sortColumnIndex = 0.obs;
 
   final repository = ProcessoRepository();
 
@@ -116,5 +119,110 @@ class ProcessoController extends BaseController {
       return true;
     }
     return false;
+  }
+
+  Future<void> sortBy(String nameColumn, int columnIndex, bool ascending) async {
+    isSorting(true);
+    sortAscending(ascending);
+    sortColumnIndex(columnIndex);
+
+    switch (nameColumn) {
+      case KCidade:
+        if (ascending) {
+          dados.value.sort((a, b) => a.cidade!.compareTo(b.cidade));
+        } else {
+          dados.value.sort((a, b) => b.cidade!.compareTo(a.cidade));
+        }
+        break;
+
+      case KNucleo:
+        if (ascending) {
+          dados.value.sort((a, b) => a.nucleo!.compareTo(b.nucleo));
+        } else {
+          dados.value.sort((a, b) => b.nucleo!.compareTo(a.nucleo));
+        }
+        break;
+
+      case KDetalhamento:
+        if (ascending) {
+          dados.value.sort((a, b) => a.detalhamentoTemaProcesso!.compareTo(b.detalhamentoTemaProcesso));
+        } else {
+          dados.value.sort((a, b) => b.detalhamentoTemaProcesso!.compareTo(a.detalhamentoTemaProcesso));
+        }
+        break;
+      case KTipo:
+        if (ascending) {
+          dados.value.sort((a, b) => a.tipo!.compareTo(b.tipo));
+        } else {
+          dados.value.sort((a, b) => b.tipo!.compareTo(a.tipo));
+        }
+        break;
+      case KAcao:
+        if (ascending) {
+          dados.value.sort((a, b) => a.acao!.compareTo(b.acao));
+        } else {
+          dados.value.sort((a, b) => b.acao!.compareTo(a.acao));
+        }
+        break;
+      case KInicioPrevito:
+        if (ascending) {
+          dados.value.sort((a, b) => a.inicioPrevisto!.compareTo(b.inicioPrevisto));
+        } else {
+          dados.value.sort((a, b) => b.inicioPrevisto!.compareTo(a.inicioPrevisto));
+        }
+        break;
+      case KTerminoPrevisto:
+        if (ascending) {
+          dados.value.sort((a, b) => a.terminoPrevisto!.compareTo(b.terminoPrevisto));
+        } else {
+          dados.value.sort((a, b) => b.terminoPrevisto!.compareTo(a.terminoPrevisto));
+        }
+        break;
+      case KTerminoReal:
+        if (ascending) {
+          dados.value.sort((a, b) => a.terminoReal!.compareTo(b.terminoReal));
+        } else {
+          dados.value.sort((a, b) => b.terminoReal!.compareTo(a.terminoReal));
+        }
+        break;
+      case KPrazoEntrega:
+        if (ascending) {
+          dados.value.sort((a, b) => a.prazoEntrega!.compareTo(b.prazoEntrega));
+        } else {
+          dados.value.sort((a, b) => b.prazoEntrega!.compareTo(a.prazoEntrega));
+        }
+        break;
+      case KStatus:
+        if (ascending) {
+          dados.value.sort((a, b) => a.status!.compareTo(b.status));
+        } else {
+          dados.value.sort((a, b) => b.status!.compareTo(a.status));
+        }
+        break;
+      case KObservacao:
+        if (ascending) {
+          dados.value.sort((a, b) => a.observacao!.compareTo(b.observacao));
+        } else {
+          dados.value.sort((a, b) => b.observacao!.compareTo(a.observacao));
+        }
+        break;
+      case KResponsavel:
+        if (ascending) {
+          dados.value.sort((a, b) => a.responsavelAtualizacao!.compareTo(b.responsavelAtualizacao));
+        } else {
+          dados.value.sort((a, b) => b.responsavelAtualizacao!.compareTo(a.responsavelAtualizacao));
+        }
+        break;
+      case KultimaAtualizacao:
+        if (ascending) {
+          dados.value.sort((a, b) => a.ultimaAtualizacao!.compareTo(b.ultimaAtualizacao));
+        } else {
+          dados.value.sort((a, b) => b.ultimaAtualizacao!.compareTo(a.ultimaAtualizacao));
+        }
+        break;
+
+      default:
+        break;
+    }
   }
 }

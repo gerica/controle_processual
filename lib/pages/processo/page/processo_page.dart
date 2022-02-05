@@ -107,7 +107,7 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
     for (final model in columnsName) {
       columns.add(
         DataColumn(
-          // onSort: (columnIndex, ascending) => controller.sortBy(columnIndex, ascending),
+          onSort: (columnIndex, ascending) => controller.sortBy(model, columnIndex, ascending),
           label: Text(
             model,
             style: Theme.of(context).textTheme.headline6,
@@ -155,11 +155,17 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
             child: SingleChildScrollView(
               controller: _scrollController,
               scrollDirection: Axis.horizontal,
-              child: DataTable(
-                // dataRowColor: MaterialStateColor.resolveWith((states) => Colors.grey),
-                columns: columns,
-                rows: rows,
-              ),
+              child: controller.isSorting.value
+                  ? DataTable(
+                      sortAscending: controller.sortAscending.value,
+                      sortColumnIndex: controller.sortColumnIndex.value,
+                      columns: columns,
+                      rows: rows,
+                    )
+                  : DataTable(
+                      columns: columns,
+                      rows: rows,
+                    ),
             ),
           ),
         ),

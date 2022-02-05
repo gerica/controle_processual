@@ -3,6 +3,7 @@ import 'package:controle_processual/utils/constants.dart';
 import 'package:controle_processual/utils/string_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
 class RowDataTable {
   final ValueSetter<dynamic> onTapItem;
@@ -36,7 +37,7 @@ class RowDataTable {
   DataCell _rowData(DateTime? date, Processo data) {
     var text = '';
     if (date != null) {
-      // text = '${DateFormat('dd/MM/yyyy').format(date as DateTime)}';
+      text = '${DateFormat('dd/MM/yyyy').format(date as DateTime)}';
     }
     return DataCell(
       Text(
