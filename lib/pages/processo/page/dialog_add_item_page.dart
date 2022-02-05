@@ -6,8 +6,6 @@ import 'package:controle_processual/pages/widgets/buttons/primary_button.dart';
 import 'package:controle_processual/pages/widgets/text_field/input_text_widget.dart';
 import 'package:controle_processual/utils/app_border_radius.dart';
 import 'package:controle_processual/utils/app_color_scheme.dart';
-import 'package:controle_processual/utils/app_font_size.dart';
-import 'package:controle_processual/utils/app_font_weight.dart';
 import 'package:controle_processual/utils/app_spacing.dart';
 import 'package:controle_processual/utils/mensagens.dart';
 import 'package:controle_processual/utils/ui_helper.dart';
@@ -31,7 +29,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           width: MediaQuery.of(context).size.width * 0.7,
           // width: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: AppSpacing.medium),
-          padding: const EdgeInsets.all(AppSpacing.medium),
+          padding: const EdgeInsets.all(AppSpacing.small),
           decoration: BoxDecoration(
             borderRadius: AppBorderRadius.medium,
             color: AppColorScheme.white,
@@ -49,8 +47,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
                   Text(
                     Mensagens.instance.titleAdditem,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: Colors.black, fontSize: AppFontSize.medium, fontWeight: AppFontWeight.bold),
+                    style: Theme.of(context).textTheme.headline5,
                   ),
                   IconButton(
                     onPressed: () {
@@ -96,7 +93,6 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           },
           textInputAction: TextInputAction.next,
         ),
-        UIHelper.verticalSpaceExtraTiny,
         InputTextWidget(
           hintText: Mensagens.instance.textNucleo,
           textCapitalization: TextCapitalization.words,
@@ -110,7 +106,6 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           },
           textInputAction: TextInputAction.next,
         ),
-        UIHelper.verticalSpaceExtraTiny,
         InputTextWidget(
           hintText: Mensagens.instance.textDetalhamentoTemaProcesso,
           textCapitalization: TextCapitalization.words,
@@ -126,7 +121,6 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           },
           textInputAction: TextInputAction.next,
         ),
-        UIHelper.verticalSpaceExtraTiny,
         InputTextWidget(
           hintText: Mensagens.instance.textTipo,
           textCapitalization: TextCapitalization.words,
@@ -140,7 +134,6 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           },
           textInputAction: TextInputAction.next,
         ),
-        UIHelper.verticalSpaceExtraTiny,
         InputTextWidget(
           hintText: Mensagens.instance.textAcao,
           textCapitalization: TextCapitalization.words,
@@ -154,13 +147,9 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           },
           textInputAction: TextInputAction.next,
         ),
-        UIHelper.verticalSpaceExtraTiny,
         _buildItemDatePicker(context, controller.inicioPrevistoController, Mensagens.instance.textInicioPrevisto),
-        UIHelper.verticalSpaceExtraTiny,
         _buildItemDatePicker(context, controller.terminoPrevistoController, Mensagens.instance.textTerminoPrevisto),
-        UIHelper.verticalSpaceExtraTiny,
         _buildItemDatePicker(context, controller.terminoRealController, Mensagens.instance.textTerminoReal),
-        UIHelper.verticalSpaceExtraTiny,
         InputTextWidget(
           hintText: Mensagens.instance.textPrazoEntrega,
           textCapitalization: TextCapitalization.words,
@@ -175,7 +164,6 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           textInputAction: TextInputAction.next,
           readOnly: true,
         ),
-        UIHelper.verticalSpaceExtraTiny,
         InputTextWidget(
           hintText: Mensagens.instance.textStatus,
           textCapitalization: TextCapitalization.words,
@@ -189,7 +177,6 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           },
           textInputAction: TextInputAction.next,
         ),
-        UIHelper.verticalSpaceExtraTiny,
         InputTextWidget(
           hintText: Mensagens.instance.textObservacao,
           textCapitalization: TextCapitalization.words,
@@ -203,7 +190,6 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           },
           textInputAction: TextInputAction.next,
         ),
-        UIHelper.verticalSpaceExtraTiny,
         InputTextWidget(
           hintText: Mensagens.instance.textResponsavel,
           textCapitalization: TextCapitalization.words,
@@ -218,7 +204,6 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           },
           textInputAction: TextInputAction.next,
         ),
-        UIHelper.verticalSpaceExtraTiny,
         _buildItemDatePicker(context, controller.ultimaAtualizacaoController, Mensagens.instance.textUltimaAtualizacao),
       ],
     );

@@ -110,4 +110,11 @@ class ProcessoController extends BaseController {
     _fetchColumns();
     columns.refresh();
   }
+
+  bool prazoNegativo(Processo dado) {
+    if (dado.prazoEntrega != null && dado.prazoEntrega!.isNotEmpty && int.parse(dado.prazoEntrega as String) < 0) {
+      return true;
+    }
+    return false;
+  }
 }

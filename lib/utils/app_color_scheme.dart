@@ -61,6 +61,8 @@ class AppColorScheme {
 class LocalThemeColors {
   static final MaterialColor primarySwatch = StyleUtils.createMaterialColor(blue);
   static final MaterialColor accentColor = StyleUtils.createMaterialColor(darkBlue);
+  static final MaterialColor errorColor = StyleUtils.createMaterialColor(error);
+  static final MaterialColor errorColor2 = StyleUtils.createMaterialColor(error2);
 
   static const whiteOutline = Color(0xFFFFFFFF);
   static const background = backgroundLight;
@@ -81,6 +83,7 @@ class LocalThemeColors {
   // static const backgroundExtraLightPink = Color(0xFFFFF7F8);
   static const success = Color(0xFF00A624);
   static const error = Color(0xFFCF3E5A);
+  static const error2 = Color(0xFFff3f3f);
   static const yellow = Color(0xFFFED543);
   static const orange = Color(0xFFFD6C2E);
 }

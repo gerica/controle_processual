@@ -110,7 +110,7 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
           // onSort: (columnIndex, ascending) => controller.sortBy(columnIndex, ascending),
           label: Text(
             model,
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 11),
+            style: Theme.of(context).textTheme.headline6,
           ),
         ),
       );
@@ -125,7 +125,15 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
     if (controller.dados.value.isNotEmpty) {
       for (final dado in controller.dados.value) {
         rows.add(
-          DataRow(cells: rowDataTable.mount(data: dado, list: controller.columns.value)),
+          DataRow(
+            color: controller.prazoNegativo(dado)
+                ? MaterialStateColor.resolveWith((states) => LocalThemeColors.errorColor2[100] as Color)
+                : MaterialStateColor.resolveWith((states) => AppColorScheme.white),
+            cells: rowDataTable.mount(
+              data: dado,
+              list: controller.columns.value,
+            ),
+          ),
         );
       }
     }
@@ -133,8 +141,9 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
     return Center(
       child: Container(
         margin: const EdgeInsets.all(8),
+        // padding: const EdgeInsets.all(3),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
+          // borderRadius: BorderRadius.circular(10.0),
           color: Colors.grey[100],
           border: Border.all(),
         ),
@@ -147,6 +156,7 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
               controller: _scrollController,
               scrollDirection: Axis.horizontal,
               child: DataTable(
+                // dataRowColor: MaterialStateColor.resolveWith((states) => Colors.grey),
                 columns: columns,
                 rows: rows,
               ),
