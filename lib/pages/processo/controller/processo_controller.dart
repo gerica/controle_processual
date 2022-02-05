@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:controle_processual/domain/enum/status.dart';
 import 'package:controle_processual/domain/model/checkbox_model.dart';
@@ -12,6 +13,7 @@ import 'package:controle_processual/pages/widgets/views/data_table/custom_column
 import 'package:controle_processual/utils/constants.dart';
 import 'package:controle_processual/utils/local_storage.dart';
 import 'package:controle_processual/utils/mensagens.dart';
+import 'package:csv/csv.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:controle_processual/pages/base/controller/base_controller.dart';
@@ -224,5 +226,58 @@ class ProcessoController extends BaseController {
       default:
         break;
     }
+  }
+
+  Future<void> download() async {
+    final List items = dados.value;
+    List<List<dynamic>> rows = [[]];
+    List<dynamic> row = [];
+
+    row.add(KCidade);
+    row.add(KNucleo);
+    row.add(KDetalhamento);
+    row.add(KTipo);
+    row.add(KAcao);
+    row.add(KInicioPrevito);
+    row.add(KTerminoPrevisto);
+    row.add(KTerminoReal);
+    row.add(KPrazoEntrega);
+    row.add(KStatus);
+    row.add(KObservacao);
+    row.add(KResponsavel);
+    row.add(KultimaAtualizacao);
+
+    rows.add(row);
+    for (int i = 0; i < items.length; i++) {
+      row = [];
+      row.add(items[i].cidade);
+      row.add(items[i].nucleo);
+      row.add(items[i].detalhamentoTemaProcesso);
+      row.add(items[i].tipo);
+      row.add(items[i].acao);
+      row.add(items[i].inicioPrevisto);
+      row.add(items[i].terminoPrevisto);
+      row.add(items[i].terminoReal);
+      row.add(items[i].prazoEntrega);
+      row.add(items[i].status);
+      row.add(items[i].observacao);
+      row.add(items[i].responsavelAtualizacao);
+      row.add(items[i].ultimaAtualizacao);
+
+      rows.add(row);
+    }
+
+    String csv = const ListToCsvConverter().convert(rows);
+    // Encode our file in base64
+    final _base64 = base64Encode(csv.codeUnits);
+    // Create the link with the file
+    final anchor = AnchorElement(href: 'data:application/octet-stream;base64,$_base64')..target = 'blank';
+    anchor.download = "processos.csv";
+
+    // trigger download
+    document.body?.append(anchor);
+    anchor.click();
+    anchor.remove();
+    return;
   }
 }

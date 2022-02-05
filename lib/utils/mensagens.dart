@@ -32,4 +32,5 @@ class Mensagens {
   String selectAll = 'Habilitar todos';
   String noSelectAll = 'Não habilitar todos';
   String cancelar = 'Cancelar';
+  String downlaod = 'Download';
 }

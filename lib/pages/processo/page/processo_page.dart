@@ -1,6 +1,6 @@
-import 'package:controle_processual/domain/enum/status.dart';
 import 'package:controle_processual/pages/processo/controller/processo_controller.dart';
 import 'package:controle_processual/pages/widgets/buttons/primary_button.dart';
+import 'package:controle_processual/pages/widgets/buttons/primary_button_icon.dart';
 import 'package:controle_processual/pages/widgets/views/data_table/row_data_table.dart';
 import 'package:controle_processual/utils/mensagens.dart';
 import 'package:controle_processual/utils/ui_helper.dart';
@@ -61,38 +61,7 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
             style: Theme.of(context).textTheme.headline4,
           ),
         ),
-        Positioned(
-          right: 120,
-          top: 10,
-          child: PrimaryButton(
-              width: 100,
-              onPressed: () => controller.dialogCustomColumns(),
-              title: Mensagens.instance.textColumns,
-              color: PrimaryButtonColor.primary,
-              type: PrimaryButtonType.circular,
-              style: PrimaryButtonStyle.filled,
-              state: Status.success),
-          // child: ElevatedButton(
-          //   onPressed: () => controller.addItemDialog(),
-          //   child: Text(Mensagens.instance.textAddItem),
-          // ),
-        ),
-        Positioned(
-          right: 10,
-          top: 10,
-          child: PrimaryButton(
-              width: 100,
-              onPressed: () => controller.addItemDialog(null),
-              title: Mensagens.instance.textAddItem,
-              color: PrimaryButtonColor.primary,
-              type: PrimaryButtonType.circular,
-              style: PrimaryButtonStyle.filled,
-              state: Status.success),
-          // child: ElevatedButton(
-          //   onPressed: () => controller.addItemDialog(),
-          //   child: Text(Mensagens.instance.textAddItem),
-          // ),
-        ),
+        ..._buildActions()
       ],
     );
   }
@@ -171,5 +140,52 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
         ),
       ),
     );
+  }
+
+  List<Widget> _buildActions() {
+    List<Widget> result = [];
+    result.add(
+      Positioned(
+        right: 90,
+        top: 10,
+        child: PrimaryButtonIcon(
+            onPressed: () => controller.dialogCustomColumns(),
+            icon: Tooltip(
+              child: const Icon(Icons.view_column, color: Colors.white),
+              message: Mensagens.instance.textColumns,
+            ),
+            color: PrimaryButtonColor.primary,
+            type: PrimaryButtonType.circular,
+            style: PrimaryButtonStyle.filled),
+      ),
+    );
+    result.add(Positioned(
+      right: 50,
+      top: 10,
+      child: PrimaryButtonIcon(
+          onPressed: () => controller.addItemDialog(null),
+          icon: Tooltip(
+            child: const Icon(Icons.add, color: Colors.white),
+            message: Mensagens.instance.textAddItem,
+          ),
+          color: PrimaryButtonColor.primary,
+          type: PrimaryButtonType.circular,
+          style: PrimaryButtonStyle.filled),
+    ));
+    result.add(Positioned(
+      right: 10,
+      top: 10,
+      child: PrimaryButtonIcon(
+        onPressed: () => controller.download(),
+        icon: Tooltip(
+          child: const Icon(Icons.download, color: Colors.white),
+          message: Mensagens.instance.downlaod,
+        ),
+        color: PrimaryButtonColor.primary,
+        type: PrimaryButtonType.circular,
+        style: PrimaryButtonStyle.filled,
+      ),
+    ));
+    return result;
   }
 }
