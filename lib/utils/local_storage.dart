@@ -27,8 +27,9 @@ class LocalStorage {
     return _localStorage.remove(key);
   }
 
-  void save(String key, String value) {
+  Future<void> save(String key, String value) async {
     _localStorage[key] = value;
+    await Future.delayed(Duration(milliseconds: 100), () {});
   }
 
   String? get(String key) {

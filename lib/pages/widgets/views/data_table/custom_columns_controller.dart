@@ -48,7 +48,7 @@ class CustomColumnsController extends BaseController {
     columns.refresh();
   }
 
-  void confirm() {
+  Future<void> confirm() async {
     final anyoneCheck = columns.value.any((element) => element.checked);
     if (!anyoneCheck) {
       Get.dialog(
@@ -63,7 +63,7 @@ class CustomColumnsController extends BaseController {
       );
     } else {
       String columnsJson = jsonEncode(columns.value);
-      LocalStorage().save(nameLocalStorage, columnsJson);
+      await LocalStorage().save(nameLocalStorage, columnsJson);
       Get.back();
     }
   }
