@@ -286,16 +286,37 @@ class ProcessoController extends BaseController {
     return;
   }
 
-  Future<void> aplicarFiltro(String valor) async {
-    if (valor.isNotEmpty) {
-      dados.clear();
+  Future<void> aplicarFiltro() async {
+    dados.clear();
+    if (ctrPesquisar.text.isNotEmpty) {
       AppUIBlock.blockUI(context: Get.context);
-      final result = await repository.recuperarComFiltro(valor);
-      dados.addAll(result);
-      dadosInical.addAll(result);
-      AppUIBlock.unblock(context: Get.context);
+      // final result = await repository.recuperarComFiltro_v1(ctrPesquisar.text);
+
+      Future<void>.delayed(Duration(milliseconds: 500), () {
+        for (Processo p in dadosInical) {
+          if (p.cidade?.toLowerCase().contains(ctrPesquisar.text.toLowerCase()) as bool) {
+            dados.add(p);
+          } else if (p.processo?.toLowerCase().contains(ctrPesquisar.text.toLowerCase()) as bool) {
+            dados.add(p);
+          } else if (p.responsavelAtualizacao?.toLowerCase().contains(ctrPesquisar.text.toLowerCase()) as bool) {
+            dados.add(p);
+          } else if (p.status?.toLowerCase().contains(ctrPesquisar.text.toLowerCase()) as bool) {
+            dados.add(p);
+          } else if (p.nucleo?.toLowerCase().contains(ctrPesquisar.text.toLowerCase()) as bool) {
+            dados.add(p);
+          } else if (p.acao?.toLowerCase().contains(ctrPesquisar.text.toLowerCase()) as bool) {
+            dados.add(p);
+          }
+        }
+        AppUIBlock.unblock(context: Get.context);
+      });
     } else {
-      _recupear();
+      dados.addAll(dadosInical);
     }
+  }
+
+  void limparConsulta() {
+    ctrPesquisar.clear();
+    aplicarFiltro();
   }
 }

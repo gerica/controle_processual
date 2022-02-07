@@ -44,8 +44,8 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
         children: [
           UIHelper.dividerDefault,
           _buildTitleTable(context),
-          // UIHelper.dividerDefault,
-          // _buildPesquisa(context),
+          UIHelper.dividerDefault,
+          _buildPesquisa(context),
           UIHelper.dividerDefault,
           _buildTable(context),
         ],
@@ -187,16 +187,32 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
   Widget _buildPesquisa(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: InputTextWidget(
-        width: MediaQuery.of(context).size.width * 0.5,
-        hintText: Mensagens.instance.pesquisar,
-        textCapitalization: TextCapitalization.words,
-        controller: controller.ctrPesquisar,
-        onFieldSubmitted: () {},
-        textInputAction: TextInputAction.next,
-        onChanged: (valor) {
-          controller.aplicarFiltro(valor);
-        },
+      child: Row(
+        children: [
+          InputTextWidget(
+            width: MediaQuery.of(context).size.width * 0.5,
+            hintText: Mensagens.instance.pesquisar,
+            textCapitalization: TextCapitalization.words,
+            controller: controller.ctrPesquisar,
+            onFieldSubmitted: () => controller.aplicarFiltro(),
+            suffixIcon: GestureDetector(
+              onTap: () => controller.aplicarFiltro(),
+              child: Icon(Icons.search),
+            ),
+            textInputAction: TextInputAction.next,
+          ),
+          UIHelper.horizontalSpaceSmall,
+          PrimaryButtonIcon(
+            onPressed: () => controller.limparConsulta(),
+            icon: Tooltip(
+              child: const Icon(Icons.clear, color: Colors.white),
+              message: Mensagens.instance.limpar,
+            ),
+            color: PrimaryButtonColor.primary,
+            type: PrimaryButtonType.circular,
+            style: PrimaryButtonStyle.filled,
+          ),
+        ],
       ),
     );
   }

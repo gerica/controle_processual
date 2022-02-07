@@ -34,4 +34,5 @@ class Mensagens {
   String cancelar = 'Cancelar';
   String downlaod = 'Download';
   String pesquisar = 'Pesquisar';
+  String limpar = 'Limpar';
 }
