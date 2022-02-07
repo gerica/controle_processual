@@ -4,8 +4,8 @@ import 'package:controle_processual/domain/model/processo.dart';
 import 'base_repository.dart';
 
 class ProcessoRepository extends BaseRepository {
-  // final storeProcessos = FirebaseFirestore.instance.collection('processos');
-  final storeProcessos = FirebaseFirestore.instance.collection('processos_dev');
+  final storeProcessos = FirebaseFirestore.instance.collection('processos');
+  // final storeProcessos = FirebaseFirestore.instance.collection('processos_dev');
 
   Future<void> salvar(Processo processo) async {
     if (processo.id == null) {
