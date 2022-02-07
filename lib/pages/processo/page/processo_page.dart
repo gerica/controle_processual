@@ -1,6 +1,7 @@
 import 'package:controle_processual/pages/processo/controller/processo_controller.dart';
 import 'package:controle_processual/pages/widgets/buttons/primary_button.dart';
 import 'package:controle_processual/pages/widgets/buttons/primary_button_icon.dart';
+import 'package:controle_processual/pages/widgets/text_field/input_text_widget.dart';
 import 'package:controle_processual/pages/widgets/views/data_table/row_data_table.dart';
 import 'package:controle_processual/utils/mensagens.dart';
 import 'package:controle_processual/utils/ui_helper.dart';
@@ -43,6 +44,8 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
         children: [
           UIHelper.dividerDefault,
           _buildTitleTable(context),
+          // UIHelper.dividerDefault,
+          // _buildPesquisa(context),
           UIHelper.dividerDefault,
           _buildTable(context),
         ],
@@ -120,22 +123,19 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
           controller: _scrollController,
           isAlwaysShown: true,
           child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              scrollDirection: Axis.horizontal,
-              child: controller.isSorting.value
-                  ? DataTable(
-                      sortAscending: controller.sortAscending.value,
-                      sortColumnIndex: controller.sortColumnIndex.value,
-                      columns: columns,
-                      rows: rows,
-                    )
-                  : DataTable(
-                      columns: columns,
-                      rows: rows,
-                    ),
-            ),
+            controller: _scrollController,
+            scrollDirection: Axis.horizontal,
+            child: controller.isSorting.value
+                ? DataTable(
+                    sortAscending: controller.sortAscending.value,
+                    sortColumnIndex: controller.sortColumnIndex.value,
+                    columns: columns,
+                    rows: rows,
+                  )
+                : DataTable(
+                    columns: columns,
+                    rows: rows,
+                  ),
           ),
         ),
       ),
@@ -182,5 +182,22 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
             ),
           ],
         ));
+  }
+
+  Widget _buildPesquisa(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: InputTextWidget(
+        width: MediaQuery.of(context).size.width * 0.5,
+        hintText: Mensagens.instance.pesquisar,
+        textCapitalization: TextCapitalization.words,
+        controller: controller.ctrPesquisar,
+        onFieldSubmitted: () {},
+        textInputAction: TextInputAction.next,
+        onChanged: (valor) {
+          controller.aplicarFiltro(valor);
+        },
+      ),
+    );
   }
 }

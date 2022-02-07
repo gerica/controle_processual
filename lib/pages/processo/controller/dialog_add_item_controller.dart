@@ -16,34 +16,15 @@ class DialogAddItemController extends BaseController {
   final processo = Processo.empty().obs;
 
   final TextEditingController cidadeController = TextEditingController();
-  final FocusNode cidadeFocus = FocusNode();
-  final cidadeError = ''.obs;
   final TextEditingController nucleoController = TextEditingController();
-  final FocusNode nucleoFocus = FocusNode();
-  final nucleoError = ''.obs;
-  final TextEditingController detalhamentoTemaProcessoController = TextEditingController();
-  final FocusNode detalhamentoTemaProcessoFocus = FocusNode();
-  final detalhamentoTemaProcessoError = ''.obs;
+  final TextEditingController detalhamentoTemaController = TextEditingController();
+  final TextEditingController processoController = TextEditingController();
   final TextEditingController tipoController = TextEditingController();
-  final FocusNode tipoFocus = FocusNode();
-  final tipoError = ''.obs;
   final TextEditingController acaoController = TextEditingController();
-  final FocusNode acaoFocus = FocusNode();
-  final acaoError = ''.obs;
   final TextEditingController prazoEntregaController = TextEditingController();
-  final FocusNode prazoEntregaFocus = FocusNode();
-  final prazoEntregaError = ''.obs;
   final TextEditingController statusController = TextEditingController();
-
-  final FocusNode statusFocus = FocusNode();
-  final statusError = ''.obs;
   final TextEditingController observacaoController = TextEditingController();
-  final FocusNode observacaoFocus = FocusNode();
-  final observacaoError = ''.obs;
   final TextEditingController responsavelAtualizacaoController = TextEditingController();
-  final FocusNode responsavelAtualizacaoFocus = FocusNode();
-  final responsavelAtualizacaoError = ''.obs;
-
   final TextEditingController inicioPrevistoController = TextEditingController();
   final TextEditingController terminoPrevistoController = TextEditingController();
   final TextEditingController terminoRealController = TextEditingController();
@@ -62,7 +43,8 @@ class DialogAddItemController extends BaseController {
       var objProcesso = processo.value;
       cidadeController.text = objProcesso.cidade!;
       nucleoController.text = objProcesso.nucleo!;
-      detalhamentoTemaProcessoController.text = objProcesso.detalhamentoTemaProcesso!;
+      detalhamentoTemaController.text = objProcesso.detalhamentoTema!;
+      processoController.text = objProcesso.processo!;
       tipoController.text = objProcesso.tipo!;
       acaoController.text = objProcesso.tipo!;
       if (objProcesso.inicioPrevisto != null) {
@@ -92,7 +74,8 @@ class DialogAddItemController extends BaseController {
   Future<void> save() async {
     final processo = Processo(
         acao: acaoController.text,
-        detalhamentoTemaProcesso: detalhamentoTemaProcessoController.text,
+        detalhamentoTema: detalhamentoTemaController.text,
+        processo: processoController.text,
         nucleo: nucleoController.text,
         cidade: cidadeController.text,
         observacao: observacaoController.text,

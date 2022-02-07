@@ -11,7 +11,8 @@ const KProcesso = 1;
 
 const KCidade = 'Cidade';
 const KNucleo = 'Núcleo';
-const KDetalhamento = 'Detalhamento do Tema Processo';
+const KDetalhamento = 'Detalhamento do Tema';
+const KProcessoTxt = 'Processo';
 const KTipo = 'Tipo';
 const KAcao = 'Ação';
 const KInicioPrevito = 'Início Previsto';

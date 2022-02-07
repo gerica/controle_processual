@@ -4,7 +4,8 @@ import 'package:controle_processual/domain/model/processo.dart';
 import 'base_repository.dart';
 
 class ProcessoRepository extends BaseRepository {
-  final storeProcessos = FirebaseFirestore.instance.collection('processos');
+  // final storeProcessos = FirebaseFirestore.instance.collection('processos');
+  final storeProcessos = FirebaseFirestore.instance.collection('processos_dev');
 
   Future<void> salvar(Processo processo) async {
     if (processo.id == null) {
@@ -22,6 +23,26 @@ class ProcessoRepository extends BaseRepository {
     List<Processo> result = [];
     QuerySnapshot querySnapshot =
         await storeProcessos.where('deleted', isEqualTo: false).where('completed', isEqualTo: false).get();
+
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      var pro = querySnapshot.docs[i];
+      result.add(Processo.fromJson(pro.data() as Map<String, dynamic>, pro.id));
+    }
+
+    return result;
+  }
+
+  Future<List<Processo>> recuperarComFiltro(String param) async {
+    List<Processo> result = [];
+    QuerySnapshot querySnapshot = await storeProcessos
+        .where('deleted', isEqualTo: false) //
+        .where('completed', isEqualTo: false) //
+        // .where('cidade', arrayContains: param) //
+        // .where('cidade', whereIn: [param]) //
+        .orderBy('cidade')
+        .startAt([param]) //
+        .endAt([param + '\uf8ff']) //
+        .get();
 
     for (int i = 0; i < querySnapshot.docs.length; i++) {
       var pro = querySnapshot.docs[i];

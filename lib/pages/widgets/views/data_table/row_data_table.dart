@@ -57,7 +57,9 @@ class RowDataTable {
         return _rowString(data.nucleo ?? "", data);
 
       case KDetalhamento:
-        return _rowString(data.detalhamentoTemaProcesso ?? "", data);
+        return _rowString(data.detalhamentoTema ?? "", data);
+      case KProcessoTxt:
+        return _rowString(data.processo ?? "", data);
       case KTipo:
         return _rowString(data.tipo ?? "", data);
       case KAcao:

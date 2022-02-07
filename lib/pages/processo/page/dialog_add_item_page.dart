@@ -82,55 +82,38 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
       runSpacing: 10,
       children: [
         InputTextWidget(
+          hintText: Mensagens.instance.textMenuProcesso,
+          textCapitalization: TextCapitalization.words,
+          controller: controller.processoController,
+          onFieldSubmitted: () {},
+          textInputAction: TextInputAction.next,
+        ),
+        InputTextWidget(
           hintText: Mensagens.instance.textCidade,
           textCapitalization: TextCapitalization.words,
           controller: controller.cidadeController,
-          errorText: controller.cidadeError.value == '' ? null : controller.cidadeError.value,
-          focusNode: controller.cidadeFocus,
-          onFieldSubmitted: () {
-            if (controller.cidadeError.value.isNotEmpty) {
-              controller.cidadeError('');
-            }
-          },
+          onFieldSubmitted: () {},
           textInputAction: TextInputAction.next,
         ),
         InputTextWidget(
           hintText: Mensagens.instance.textNucleo,
           textCapitalization: TextCapitalization.words,
           controller: controller.nucleoController,
-          errorText: controller.nucleoError.value == '' ? null : controller.nucleoError.value,
-          focusNode: controller.nucleoFocus,
-          onFieldSubmitted: () {
-            if (controller.nucleoError.value.isNotEmpty) {
-              controller.nucleoError('');
-            }
-          },
+          onFieldSubmitted: () {},
           textInputAction: TextInputAction.next,
         ),
         InputTextWidget(
           hintText: Mensagens.instance.textTipo,
           textCapitalization: TextCapitalization.words,
           controller: controller.tipoController,
-          errorText: controller.tipoError.value == '' ? null : controller.tipoError.value,
-          focusNode: controller.tipoFocus,
-          onFieldSubmitted: () {
-            if (controller.tipoError.value.isNotEmpty) {
-              controller.tipoError('');
-            }
-          },
+          onFieldSubmitted: () {},
           textInputAction: TextInputAction.next,
         ),
         InputTextWidget(
           hintText: Mensagens.instance.textAcao,
           textCapitalization: TextCapitalization.words,
           controller: controller.acaoController,
-          errorText: controller.acaoError.value == '' ? null : controller.acaoError.value,
-          focusNode: controller.acaoFocus,
-          onFieldSubmitted: () {
-            if (controller.acaoError.value.isNotEmpty) {
-              controller.acaoError('');
-            }
-          },
+          onFieldSubmitted: () {},
           textInputAction: TextInputAction.next,
         ),
         _buildItemDatePicker(context, controller.inicioPrevistoController, Mensagens.instance.textInicioPrevisto),
@@ -140,13 +123,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           hintText: Mensagens.instance.textPrazoEntrega,
           textCapitalization: TextCapitalization.words,
           controller: controller.prazoEntregaController,
-          errorText: controller.prazoEntregaError.value == '' ? null : controller.prazoEntregaError.value,
-          focusNode: controller.prazoEntregaFocus,
-          onFieldSubmitted: () {
-            if (controller.prazoEntregaError.value.isNotEmpty) {
-              controller.prazoEntregaError('');
-            }
-          },
+          onFieldSubmitted: () {},
           textInputAction: TextInputAction.next,
           readOnly: true,
         ),
@@ -155,30 +132,15 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           hintText: Mensagens.instance.textResponsavel,
           textCapitalization: TextCapitalization.words,
           controller: controller.responsavelAtualizacaoController,
-          errorText:
-              controller.responsavelAtualizacaoError.value == '' ? null : controller.responsavelAtualizacaoError.value,
-          focusNode: controller.responsavelAtualizacaoFocus,
-          onFieldSubmitted: () {
-            if (controller.responsavelAtualizacaoError.value.isNotEmpty) {
-              controller.observacaoError('');
-            }
-          },
+          onFieldSubmitted: () {},
           textInputAction: TextInputAction.next,
         ),
         _buildItemDatePicker(context, controller.ultimaAtualizacaoController, Mensagens.instance.textUltimaAtualizacao),
         InputTextWidget(
           hintText: Mensagens.instance.textDetalhamentoTemaProcesso,
           textCapitalization: TextCapitalization.words,
-          controller: controller.detalhamentoTemaProcessoController,
-          errorText: controller.detalhamentoTemaProcessoError.value == ''
-              ? null
-              : controller.detalhamentoTemaProcessoError.value,
-          focusNode: controller.detalhamentoTemaProcessoFocus,
-          onFieldSubmitted: () {
-            if (controller.detalhamentoTemaProcessoError.value.isNotEmpty) {
-              controller.detalhamentoTemaProcessoError('');
-            }
-          },
+          controller: controller.detalhamentoTemaController,
+          onFieldSubmitted: () {},
           textInputAction: TextInputAction.next,
           width: MediaQuery.of(context).size.width * 0.315,
           height: 80,
@@ -189,13 +151,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           hintText: Mensagens.instance.textObservacao,
           textCapitalization: TextCapitalization.words,
           controller: controller.observacaoController,
-          errorText: controller.observacaoError.value == '' ? null : controller.observacaoError.value,
-          focusNode: controller.observacaoFocus,
-          onFieldSubmitted: () {
-            if (controller.observacaoError.value.isNotEmpty) {
-              controller.observacaoError('');
-            }
-          },
+          onFieldSubmitted: () {},
           textInputAction: TextInputAction.next,
           width: MediaQuery.of(context).size.width * 0.35,
           height: 80,
@@ -321,7 +277,10 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
     String selected = controller.status[1];
     if (controller.processo.value != null && controller.processo.value.status != null) {
       selected = controller.processo.value.status!;
+    } else {
+      controller.statusController.text = selected;
     }
+
     return DropdownButtonFormFieldWidget(
       hintText: Mensagens.instance.textStatus,
       selected: selected,

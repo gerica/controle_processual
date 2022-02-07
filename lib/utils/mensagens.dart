@@ -33,4 +33,5 @@ class Mensagens {
   String noSelectAll = 'Não habilitar todos';
   String cancelar = 'Cancelar';
   String downlaod = 'Download';
+  String pesquisar = 'Pesquisar';
 }

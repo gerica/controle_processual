@@ -23,10 +23,13 @@ import 'package:controle_processual/pages/widgets/views/extension_dialog.dart';
 class ProcessoController extends BaseController {
   late Size size;
   final dados = [].obs;
+  final dadosInical = [].obs;
+
   final columns = [].obs;
   final isSorting = false.obs;
   final sortAscending = false.obs;
   final sortColumnIndex = 0.obs;
+  final TextEditingController ctrPesquisar = TextEditingController();
 
   final repository = ProcessoRepository();
 
@@ -42,6 +45,7 @@ class ProcessoController extends BaseController {
     AppUIBlock.blockUI(context: Get.context);
     final result = await repository.recuperarAtivos();
     dados.addAll(result);
+    dadosInical.addAll(result);
     AppUIBlock.unblock(context: Get.context);
   }
 
@@ -58,6 +62,7 @@ class ProcessoController extends BaseController {
   Future<void> _fetchColumns() async {
     String? columnsStr = await LocalStorage().get(KLocalStorageColumns);
     if (columnsStr == null || columnsStr.isEmpty) {
+      columns.add(CheckBoxModel(text: KProcessoTxt, checked: true, order: 1));
       columns.add(CheckBoxModel(text: KCidade, checked: true, order: 1));
       columns.add(CheckBoxModel(text: KNucleo, checked: true, order: 2));
       columns.add(CheckBoxModel(text: KDetalhamento, checked: true, order: 3));
@@ -279,5 +284,18 @@ class ProcessoController extends BaseController {
     anchor.click();
     anchor.remove();
     return;
+  }
+
+  Future<void> aplicarFiltro(String valor) async {
+    if (valor.isNotEmpty) {
+      dados.clear();
+      AppUIBlock.blockUI(context: Get.context);
+      final result = await repository.recuperarComFiltro(valor);
+      dados.addAll(result);
+      dadosInical.addAll(result);
+      AppUIBlock.unblock(context: Get.context);
+    } else {
+      _recupear();
+    }
   }
 }

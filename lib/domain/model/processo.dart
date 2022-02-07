@@ -4,7 +4,8 @@ class Processo {
   String? id;
   String? cidade;
   String? nucleo;
-  String? detalhamentoTemaProcesso;
+  String? detalhamentoTema;
+  String? processo;
   String? tipo;
   String? acao;
   String? prazoEntrega;
@@ -23,7 +24,8 @@ class Processo {
   Processo(
       {required this.cidade,
       required this.nucleo,
-      required this.detalhamentoTemaProcesso,
+      required this.detalhamentoTema,
+      required this.processo,
       required this.tipo,
       required this.acao,
       required this.prazoEntrega,
@@ -40,7 +42,8 @@ class Processo {
     id = idDoc;
     cidade = parsedJson['cidade'] as String;
     nucleo = parsedJson['nucleo'] as String;
-    detalhamentoTemaProcesso = parsedJson['detalhamentoTemaProcesso'] as String;
+    detalhamentoTema = parsedJson['detalhamentoTema'] == null ? null : parsedJson['detalhamentoTema'] as String;
+    processo = parsedJson['processo'] == null ? null : parsedJson['processo'] as String;
     tipo = parsedJson['tipo'] as String;
     acao = parsedJson['acao'] as String;
     prazoEntrega = parsedJson['prazoEntrega'] as String;
@@ -65,15 +68,11 @@ class Processo {
     }
   }
 
-  @override
-  String toString() {
-    return 'Processo{cidade: $cidade, nucleo: $nucleo, detalhamentoTemaProcesso: $detalhamentoTemaProcesso, tipo: $tipo, acao: $acao, prazoEntrega: $prazoEntrega, status: $status, observacao: $observacao, responsavelAtualizacao: $responsavelAtualizacao, inicioPrevisto: $inicioPrevisto, terminoPrevisto: $terminoPrevisto, terminoReal: $terminoReal, ultimaAtualizacao: $ultimaAtualizacao}';
-  }
-
   Map<String, dynamic> toJson() => {
         'cidade': cidade,
         'nucleo': nucleo,
-        'detalhamentoTemaProcesso': detalhamentoTemaProcesso,
+        'detalhamentoTema': detalhamentoTema,
+        'processo': processo,
         'tipo': tipo,
         'acao': acao,
         'prazoEntrega': prazoEntrega,
