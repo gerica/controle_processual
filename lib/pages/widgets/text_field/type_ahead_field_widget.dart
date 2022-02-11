@@ -1,9 +1,7 @@
 import 'package:controle_processual/domain/model/cidade.dart';
 import 'package:controle_processual/pages/widgets/text_field/input_decorations.dart';
-import 'package:controle_processual/utils/mensagens.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class TypeAheadFieldWidget extends StatelessWidget {
   final FocusNode? focusNode;
@@ -53,7 +51,7 @@ class TypeAheadFieldWidget extends StatelessWidget {
     );
   }
 
-  TypeAheadFormField<Cidade?> buildTextFieldCore(BuildContext context) {
+  Widget buildTextFieldCore(BuildContext context) {
     final decoration = InputDecorations(
       height: height,
       background: background,
@@ -66,37 +64,67 @@ class TypeAheadFieldWidget extends StatelessWidget {
       prefixStyle: prefixStyle,
       suffixIcon: suffixIcon,
     );
-    return TypeAheadFormField<Cidade?>(
-      textFieldConfiguration: TextFieldConfiguration(
-          controller: controller,
-          // style: DefaultTextStyle.of(context).style.copyWith(fontStyle: FontStyle.italic),
-          decoration: decoration.buildInputDecoration()),
-      suggestionsCallback: (pattern) async {
+
+    return Autocomplete<Cidade>(
+      initialValue: TextEditingValue(text: controller.text),
+      displayStringForOption: (value) => value.nome,
+      optionsBuilder: (TextEditingValue pattern) {
+        if (pattern.text == '') {
+          return const Iterable<Cidade>.empty();
+        }
+
         return CidadeDados.getCidades().where((cidade) {
           final nameLower = cidade.nome.toLowerCase();
-          final queryLower = pattern.toLowerCase();
+          final queryLower = pattern.text.toLowerCase();
           return nameLower.contains(queryLower);
         });
       },
-      itemBuilder: (context, suggestion) {
-        return ListTile(
-          title: Text(suggestion!.nome),
+      onSelected: (Cidade selection) {
+        controller.text = selection.nome;
+      },
+      fieldViewBuilder: (context, fieldTextEditingController, fieldFocusNode, onFieldSubmitted) {
+        fieldTextEditingController.text = controller.text;
+
+        return TextFormField(
+          controller: fieldTextEditingController,
+          focusNode: fieldFocusNode,
+          onEditingComplete: onFieldSubmitted,
+          decoration: decoration.buildInputDecoration(),
         );
       },
-      onSuggestionSelected: (suggestion) {
-        controller.text = suggestion!.nome;
-      },
-      noItemsFoundBuilder: (context) => Container(
-        height: 40,
-        padding: const EdgeInsets.all(8),
-        child: Text(
-          Mensagens.instance.nenhumItemEncontrado,
-          style: Theme.of(context).textTheme.headline6,
-        ),
-      ),
-      transitionBuilder: (context, suggestionsBox, controller) {
-        return suggestionsBox;
-      },
     );
+    // return TypeAheadFormField<Cidade?>(
+    //   textFieldConfiguration: TextFieldConfiguration(
+    //       autocorrect: true,
+    //       controller: controller,
+    //       // style: DefaultTextStyle.of(context).style.copyWith(fontStyle: FontStyle.italic),
+    //       decoration: decoration.buildInputDecoration()),
+    //   suggestionsCallback: (pattern) async {
+    //     return CidadeDados.getCidades().where((cidade) {
+    //       final nameLower = cidade.nome.toLowerCase();
+    //       final queryLower = pattern.toLowerCase();
+    //       return nameLower.contains(queryLower);
+    //     });
+    //   },
+    //   itemBuilder: (context, suggestion) {
+    //     return ListTile(
+    //       title: Text(suggestion!.nome),
+    //     );
+    //   },
+    //   onSuggestionSelected: (suggestion) {
+    //     controller.text = suggestion!.nome;
+    //   },
+    //   noItemsFoundBuilder: (context) => Container(
+    //     height: 40,
+    //     padding: const EdgeInsets.all(8),
+    //     child: Text(
+    //       Mensagens.instance.nenhumItemEncontrado,
+    //       style: Theme.of(context).textTheme.headline6,
+    //     ),
+    //   ),
+    //   transitionBuilder: (context, suggestionsBox, controller) {
+    //     return suggestionsBox;
+    //   },
+    // );
   }
 }

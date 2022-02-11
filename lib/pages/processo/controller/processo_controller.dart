@@ -90,8 +90,6 @@ class ProcessoController extends BaseController {
 
   Future<void> addItemDialog(Processo? processo) async {
     if (Get.isSnackbarOpen) {
-      print('ProcessoController.addItemDialog: snackbar open');
-      // AppUIBlock.unblock(context: Get.context);
       Get.back();
     }
 

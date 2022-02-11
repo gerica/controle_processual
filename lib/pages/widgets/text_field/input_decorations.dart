@@ -15,8 +15,9 @@ class InputDecorations {
   final Color? borderColor;
   final double? height;
   final String? errorText;
+  Widget? child;
 
-  const InputDecorations({
+  InputDecorations({
     this.background,
     this.suffixIcon,
     this.hintText,
@@ -27,14 +28,10 @@ class InputDecorations {
     this.borderColor,
     this.height,
     this.errorText,
+    this.child,
   });
 
   InputDecoration buildInputDecoration() => InputDecoration(
-        // suffixIcon: suffixIcon,
-        // border: InputBorder.none,
-        // hintText: hintText,
-        // hintStyle: const TextStyle(color: Colors.white, fontSize: 15.0),
-        // contentPadding: const EdgeInsets.only(top: 30.0, right: 30.0, bottom: 30.0, left: 5.0),
         fillColor: background ?? AppColorScheme.white,
         filled: true,
         suffixIcon: Padding(
@@ -60,6 +57,7 @@ class InputDecorations {
         errorStyle: TextStyle(fontSize: AppFontSize.secondary, color: AppColorScheme.error),
         errorText: errorText,
         contentPadding: const EdgeInsets.only(left: AppSpacing.extraMedium, top: AppSpacing.small),
+
       );
 
   InputBorder get buildFocusedBorderSide => OutlineInputBorder(

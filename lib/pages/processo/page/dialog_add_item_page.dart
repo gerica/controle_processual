@@ -21,6 +21,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
 
   DialogAddItemPage(Processo? processo) {
     controller.processo(processo);
+    controller.initCampos();
   }
 
   @override
@@ -100,23 +101,6 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           hintText: Mensagens.instance.textCidade,
           controller: controller.cidadeController,
         ),
-
-        // TypeAheadField<Cidade?>(
-        //   textFieldConfiguration: TextFieldConfiguration(
-        //       // style: DefaultTextStyle.of(context).style.copyWith(fontStyle: FontStyle.italic),
-        //       decoration: decoration.buildInputDecoration()),
-        //   suggestionsCallback: (pattern) async {
-        //     return await controller.getSuggestions(pattern);
-        //   },
-        //   itemBuilder: (context, suggestion) {
-        //     return ListTile(
-        //       title: Text(suggestion!.nome),
-        //     );
-        //   },
-        //   onSuggestionSelected: (suggestion) {
-        //     print('DialogAddItemPage._buildForms: ${suggestion!.nome}');
-        //   },
-        // ),
         InputTextWidget(
           hintText: Mensagens.instance.textNucleo,
           textCapitalization: TextCapitalization.words,

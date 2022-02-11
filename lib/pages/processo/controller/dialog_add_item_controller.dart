@@ -33,12 +33,6 @@ class DialogAddItemController extends BaseController {
 
   List<String> get status => ['Em Andamento', 'Planejado', 'Atrasado', 'Concluído'];
 
-  @override
-  void onReady() {
-    super.onReady();
-    initCampos();
-  }
-
   initCampos() {
     if (processo.value != null && processo.value.id != null) {
       var objProcesso = processo.value;
