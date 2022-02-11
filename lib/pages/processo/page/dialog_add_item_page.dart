@@ -5,6 +5,7 @@ import 'package:controle_processual/pages/processo/controller/dialog_add_item_co
 import 'package:controle_processual/pages/widgets/buttons/primary_button.dart';
 import 'package:controle_processual/pages/widgets/text_field/dropdown_button_form_field_widget.dart';
 import 'package:controle_processual/pages/widgets/text_field/input_text_widget.dart';
+import 'package:controle_processual/pages/widgets/text_field/type_ahead_field_widget.dart';
 import 'package:controle_processual/utils/app_border_radius.dart';
 import 'package:controle_processual/utils/app_color_scheme.dart';
 import 'package:controle_processual/utils/app_spacing.dart';
@@ -88,13 +89,34 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           onFieldSubmitted: () {},
           textInputAction: TextInputAction.next,
         ),
-        InputTextWidget(
+        // InputTextWidget(
+        //   hintText: Mensagens.instance.textCidade,
+        //   textCapitalization: TextCapitalization.words,
+        //   controller: controller.cidadeController,
+        //   onFieldSubmitted: () {},
+        //   textInputAction: TextInputAction.next,
+        // ),
+        TypeAheadFieldWidget(
           hintText: Mensagens.instance.textCidade,
-          textCapitalization: TextCapitalization.words,
           controller: controller.cidadeController,
-          onFieldSubmitted: () {},
-          textInputAction: TextInputAction.next,
         ),
+
+        // TypeAheadField<Cidade?>(
+        //   textFieldConfiguration: TextFieldConfiguration(
+        //       // style: DefaultTextStyle.of(context).style.copyWith(fontStyle: FontStyle.italic),
+        //       decoration: decoration.buildInputDecoration()),
+        //   suggestionsCallback: (pattern) async {
+        //     return await controller.getSuggestions(pattern);
+        //   },
+        //   itemBuilder: (context, suggestion) {
+        //     return ListTile(
+        //       title: Text(suggestion!.nome),
+        //     );
+        //   },
+        //   onSuggestionSelected: (suggestion) {
+        //     print('DialogAddItemPage._buildForms: ${suggestion!.nome}');
+        //   },
+        // ),
         InputTextWidget(
           hintText: Mensagens.instance.textNucleo,
           textCapitalization: TextCapitalization.words,

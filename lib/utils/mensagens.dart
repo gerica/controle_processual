@@ -35,4 +35,5 @@ class Mensagens {
   String downlaod = 'Download';
   String pesquisar = 'Pesquisar';
   String limpar = 'Limpar';
+  String nenhumItemEncontrado = 'Nenhum item encontrado!';
 }
