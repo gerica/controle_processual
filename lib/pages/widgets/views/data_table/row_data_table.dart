@@ -40,7 +40,7 @@ class RowDataTable {
       text = '${DateFormat('dd/MM/yyyy').format(date as DateTime)}';
     }
     return DataCell(
-      Text(
+      SelectableText(
         text,
         style: Theme.of(context).textTheme.bodyText1,
       ),
@@ -83,7 +83,7 @@ class RowDataTable {
 
       default:
         return DataCell(
-          Text(
+          SelectableText(
             "Need implementation",
             style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 10),
           ),

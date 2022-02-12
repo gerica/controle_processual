@@ -31,7 +31,7 @@ class HomePage extends GetView<HomeController> with BasePage {
       // height: 100,
       color: AppColorScheme.background,
       child: const Center(
-        child: Text("Controle processual"),
+        child: SelectableText("Controle processual"),
       ),
     );
   }

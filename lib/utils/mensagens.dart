@@ -10,6 +10,7 @@ class Mensagens {
   String textAddItem = 'Adicionar';
   String textColumns = 'Colunas';
   String titleAdditem = 'Adicionar Item';
+  String tituloPaginaProcessual = "Controle Processual";
   String textCidade = 'Cidade';
   String textNucleo = 'Núcleo';
   String textDetalhamentoTemaProcesso = 'Detalhamento do Tema do Processo';

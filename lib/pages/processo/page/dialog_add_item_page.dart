@@ -47,7 +47,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
                   Container(
                     width: 40,
                   ),
-                  Text(
+                  SelectableText(
                     Mensagens.instance.titleAdditem,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline5,

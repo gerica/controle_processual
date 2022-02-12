@@ -54,13 +54,12 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
   }
 
   Widget _buildTitleTable(BuildContext context) {
-    var title = "Controle Processual";
 
     return Stack(
       children: [
         Center(
-          child: Text(
-            title,
+          child: SelectableText(
+            Mensagens.instance.tituloPaginaProcessual,
             style: Theme.of(context).textTheme.headline4,
           ),
         ),
@@ -71,7 +70,7 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
 
   Widget _buildTable(BuildContext context) {
     if (controller.dados.value.isEmpty) {
-      return Center(child: Text("Nenhum processo cadastrado"));
+      return Center(child: SelectableText("Nenhum processo cadastrado"));
     }
     List<DataColumn> columns = [];
     List<String> columnsName = controller.columnsName;
@@ -80,7 +79,7 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
       columns.add(
         DataColumn(
           onSort: (columnIndex, ascending) => controller.sortBy(model, columnIndex, ascending),
-          label: Text(
+          label: SelectableText(
             model,
             style: Theme.of(context).textTheme.headline6,
           ),
