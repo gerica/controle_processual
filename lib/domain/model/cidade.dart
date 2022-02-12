@@ -1,7 +1,15 @@
-class Cidade {
+import 'package:controle_processual/domain/model/option.dart';
+
+class Cidade implements Option {
   String nome;
 
   Cidade(this.nome);
+
+  @override
+  String get label => nome;
+
+  @override
+  String get value => nome;
 }
 
 class CidadeDados {

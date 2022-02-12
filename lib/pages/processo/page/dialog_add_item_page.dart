@@ -100,6 +100,7 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
         TypeAheadFieldWidget(
           hintText: Mensagens.instance.textCidade,
           controller: controller.cidadeController,
+          optionList: controller.getSuggestions,
         ),
         InputTextWidget(
           hintText: Mensagens.instance.textNucleo,

@@ -1,12 +1,10 @@
-import 'package:controle_processual/domain/model/cidade.dart';
+import 'package:controle_processual/domain/model/option.dart';
 import 'package:controle_processual/pages/widgets/text_field/input_decorations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class TypeAheadFieldWidget extends StatelessWidget {
   final FocusNode? focusNode;
-  final TextStyle? style;
-  final bool autofocus;
   final Color? background;
   final Widget? suffixIcon;
   final String? hintText;
@@ -18,14 +16,13 @@ class TypeAheadFieldWidget extends StatelessWidget {
   final double height;
   double? width;
   final String? errorText;
-  final bool isExpanded;
   final TextEditingController controller;
+  final Function(String) optionList;
 
   TypeAheadFieldWidget({
     required this.controller,
+    required this.optionList,
     this.focusNode,
-    this.style,
-    this.autofocus = false,
     this.background,
     this.suffixIcon,
     this.hintText,
@@ -37,7 +34,6 @@ class TypeAheadFieldWidget extends StatelessWidget {
     this.height = 40,
     this.width,
     this.errorText,
-    this.isExpanded = true,
     Key? key,
   }) : super(key: key);
 
@@ -65,22 +61,18 @@ class TypeAheadFieldWidget extends StatelessWidget {
       suffixIcon: suffixIcon,
     );
 
-    return Autocomplete<Cidade>(
+    return Autocomplete<Option>(
       initialValue: TextEditingValue(text: controller.text),
-      displayStringForOption: (value) => value.nome,
+      displayStringForOption: (value) => value.label,
       optionsBuilder: (TextEditingValue pattern) {
         if (pattern.text == '') {
-          return const Iterable<Cidade>.empty();
+          return const Iterable<Option>.empty();
         }
 
-        return CidadeDados.getCidades().where((cidade) {
-          final nameLower = cidade.nome.toLowerCase();
-          final queryLower = pattern.text.toLowerCase();
-          return nameLower.contains(queryLower);
-        });
+        return optionList(pattern.text);
       },
-      onSelected: (Cidade selection) {
-        controller.text = selection.nome;
+      onSelected: (Option selection) {
+        controller.text = selection.value;
       },
       fieldViewBuilder: (context, fieldTextEditingController, fieldFocusNode, onFieldSubmitted) {
         fieldTextEditingController.text = controller.text;
@@ -93,38 +85,5 @@ class TypeAheadFieldWidget extends StatelessWidget {
         );
       },
     );
-    // return TypeAheadFormField<Cidade?>(
-    //   textFieldConfiguration: TextFieldConfiguration(
-    //       autocorrect: true,
-    //       controller: controller,
-    //       // style: DefaultTextStyle.of(context).style.copyWith(fontStyle: FontStyle.italic),
-    //       decoration: decoration.buildInputDecoration()),
-    //   suggestionsCallback: (pattern) async {
-    //     return CidadeDados.getCidades().where((cidade) {
-    //       final nameLower = cidade.nome.toLowerCase();
-    //       final queryLower = pattern.toLowerCase();
-    //       return nameLower.contains(queryLower);
-    //     });
-    //   },
-    //   itemBuilder: (context, suggestion) {
-    //     return ListTile(
-    //       title: Text(suggestion!.nome),
-    //     );
-    //   },
-    //   onSuggestionSelected: (suggestion) {
-    //     controller.text = suggestion!.nome;
-    //   },
-    //   noItemsFoundBuilder: (context) => Container(
-    //     height: 40,
-    //     padding: const EdgeInsets.all(8),
-    //     child: Text(
-    //       Mensagens.instance.nenhumItemEncontrado,
-    //       style: Theme.of(context).textTheme.headline6,
-    //     ),
-    //   ),
-    //   transitionBuilder: (context, suggestionsBox, controller) {
-    //     return suggestionsBox;
-    //   },
-    // );
   }
 }

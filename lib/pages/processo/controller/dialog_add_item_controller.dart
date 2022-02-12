@@ -1,5 +1,6 @@
 import 'package:controle_processual/domain/enum/status.dart';
 import 'package:controle_processual/domain/model/cidade.dart';
+import 'package:controle_processual/domain/model/option.dart';
 import 'package:controle_processual/domain/model/processo.dart';
 import 'package:controle_processual/domain/repository/processo_respository.dart';
 import 'package:controle_processual/pages/base/controller/base_controller.dart';
@@ -125,7 +126,7 @@ class DialogAddItemController extends BaseController {
     }
   }
 
-  Iterable<Cidade> getSuggestions(String pattern) {
+  Iterable<Option> getSuggestions(String pattern) {
     return CidadeDados.getCidades().where((cidade) {
       final nameLower = cidade.nome.toLowerCase();
       final queryLower = pattern.toLowerCase();
