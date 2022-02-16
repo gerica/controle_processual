@@ -60,8 +60,8 @@ class RowDataTable {
         return _rowString(data.detalhamentoTema ?? "", data);
       case KProcessoTxt:
         return _rowString(data.processo ?? "", data);
-      case KTipo:
-        return _rowString(data.tipo ?? "", data);
+      case KServidor:
+        return _rowString(data.servidor ?? "", data);
       case KAcao:
         return _rowString(data.acao ?? "", data);
       case KInicioPrevito:

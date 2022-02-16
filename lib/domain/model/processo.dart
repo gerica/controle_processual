@@ -6,7 +6,7 @@ class Processo {
   String? nucleo;
   String? detalhamentoTema;
   String? processo;
-  String? tipo;
+  String? servidor;
   String? acao;
   String? prazoEntrega;
   String? status;
@@ -26,7 +26,7 @@ class Processo {
       required this.nucleo,
       required this.detalhamentoTema,
       required this.processo,
-      required this.tipo,
+      required this.servidor,
       required this.acao,
       required this.prazoEntrega,
       required this.status,
@@ -43,8 +43,8 @@ class Processo {
     cidade = parsedJson['cidade'] as String;
     nucleo = parsedJson['nucleo'] as String;
     detalhamentoTema = parsedJson['detalhamentoTema'] == null ? null : parsedJson['detalhamentoTema'] as String;
-    processo = parsedJson['processo'] == null ? null : parsedJson['processo'] as String;
-    tipo = parsedJson['tipo'] as String;
+    processo = parsedJson['processo'] == null ? '' : parsedJson['processo'] as String;
+    servidor = parsedJson['servidor'] == null ? '' : parsedJson['servidor'] as String;
     acao = parsedJson['acao'] as String;
     prazoEntrega = parsedJson['prazoEntrega'] as String;
     status = parsedJson['status'] as String;
@@ -73,7 +73,7 @@ class Processo {
         'nucleo': nucleo,
         'detalhamentoTema': detalhamentoTema,
         'processo': processo,
-        'tipo': tipo,
+        'servidor': servidor,
         'acao': acao,
         'prazoEntrega': prazoEntrega,
         'status': status,

@@ -14,7 +14,7 @@ class Mensagens {
   String textCidade = 'Cidade';
   String textNucleo = 'Núcleo';
   String textDetalhamentoTemaProcesso = 'Detalhamento do Tema do Processo';
-  String textTipo = 'Tipo';
+  String textServidor = 'Servidor';
   String textAcao = 'Ação';
   String textInicioPrevisto = 'Início Previsto';
   String textTerminoPrevisto = 'Término Previsto';

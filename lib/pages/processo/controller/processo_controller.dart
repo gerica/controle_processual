@@ -66,7 +66,7 @@ class ProcessoController extends BaseController {
       columns.add(CheckBoxModel(text: KCidade, checked: true, order: 1));
       columns.add(CheckBoxModel(text: KNucleo, checked: true, order: 2));
       columns.add(CheckBoxModel(text: KDetalhamento, checked: true, order: 3));
-      columns.add(CheckBoxModel(text: KTipo, checked: true, order: 4));
+      columns.add(CheckBoxModel(text: KServidor, checked: true, order: 4));
       columns.add(CheckBoxModel(text: KAcao, checked: true, order: 5));
       columns.add(CheckBoxModel(text: KInicioPrevito, checked: true, order: 6));
       columns.add(CheckBoxModel(text: KTerminoPrevisto, checked: true, order: 7));
@@ -155,11 +155,11 @@ class ProcessoController extends BaseController {
           dados.value.sort((a, b) => b.detalhamentoTemaProcesso!.compareTo(a.detalhamentoTemaProcesso));
         }
         break;
-      case KTipo:
+      case KServidor:
         if (ascending) {
-          dados.value.sort((a, b) => a.tipo!.compareTo(b.tipo));
+          dados.value.sort((a, b) => a.servidor!.compareTo(b.servidor));
         } else {
-          dados.value.sort((a, b) => b.tipo!.compareTo(a.tipo));
+          dados.value.sort((a, b) => b.servidor!.compareTo(a.servidor));
         }
         break;
       case KAcao:
@@ -239,7 +239,7 @@ class ProcessoController extends BaseController {
     row.add(KCidade);
     row.add(KNucleo);
     row.add(KDetalhamento);
-    row.add(KTipo);
+    row.add(KServidor);
     row.add(KAcao);
     row.add(KInicioPrevito);
     row.add(KTerminoPrevisto);
@@ -256,7 +256,7 @@ class ProcessoController extends BaseController {
       row.add(items[i].cidade);
       row.add(items[i].nucleo);
       row.add(items[i].detalhamentoTemaProcesso);
-      row.add(items[i].tipo);
+      row.add(items[i].servidor);
       row.add(items[i].acao);
       row.add(items[i].inicioPrevisto);
       row.add(items[i].terminoPrevisto);

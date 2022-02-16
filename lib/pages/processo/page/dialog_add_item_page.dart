@@ -110,9 +110,9 @@ class DialogAddItemPage extends GetView<DialogAddItemController> with BasePage {
           textInputAction: TextInputAction.next,
         ),
         InputTextWidget(
-          hintText: Mensagens.instance.textTipo,
+          hintText: Mensagens.instance.textServidor,
           textCapitalization: TextCapitalization.words,
-          controller: controller.tipoController,
+          controller: controller.servidorController,
           onFieldSubmitted: () {},
           textInputAction: TextInputAction.next,
         ),

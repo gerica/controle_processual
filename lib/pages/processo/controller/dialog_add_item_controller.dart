@@ -21,7 +21,7 @@ class DialogAddItemController extends BaseController {
   final TextEditingController nucleoController = TextEditingController();
   final TextEditingController detalhamentoTemaController = TextEditingController();
   final TextEditingController processoController = TextEditingController();
-  final TextEditingController tipoController = TextEditingController();
+  final TextEditingController servidorController = TextEditingController();
   final TextEditingController acaoController = TextEditingController();
   final TextEditingController prazoEntregaController = TextEditingController();
   final TextEditingController statusController = TextEditingController();
@@ -41,8 +41,8 @@ class DialogAddItemController extends BaseController {
       nucleoController.text = objProcesso.nucleo!;
       detalhamentoTemaController.text = objProcesso.detalhamentoTema!;
       processoController.text = objProcesso.processo!;
-      tipoController.text = objProcesso.tipo!;
-      acaoController.text = objProcesso.tipo!;
+      servidorController.text = objProcesso.servidor!;
+      acaoController.text = objProcesso.servidor!;
       if (objProcesso.inicioPrevisto != null) {
         inicioPrevistoController.text = DateFormat('dd/MM/yyyy').format(objProcesso.inicioPrevisto!);
       }
@@ -78,7 +78,7 @@ class DialogAddItemController extends BaseController {
         prazoEntrega: prazoEntregaController.text,
         responsavelAtualizacao: responsavelAtualizacaoController.text,
         status: statusController.text,
-        tipo: tipoController.text,
+        servidor: servidorController.text,
         inicioPrevisto: inicioPrevistoController.text.isNotEmpty
             ? DateFormat('dd/MM/yyyy').parse(inicioPrevistoController.text)
             : null,
