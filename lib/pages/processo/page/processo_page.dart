@@ -54,7 +54,6 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
   }
 
   Widget _buildTitleTable(BuildContext context) {
-
     return Stack(
       children: [
         Center(
@@ -79,7 +78,7 @@ class ProcessoPage extends GetView<ProcessoController> with BasePage {
       columns.add(
         DataColumn(
           onSort: (columnIndex, ascending) => controller.sortBy(model, columnIndex, ascending),
-          label: SelectableText(
+          label: Text(
             model,
             style: Theme.of(context).textTheme.headline6,
           ),

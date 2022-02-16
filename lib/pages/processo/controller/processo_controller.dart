@@ -132,6 +132,13 @@ class ProcessoController extends BaseController {
     sortColumnIndex(columnIndex);
 
     switch (nameColumn) {
+      case KProcessoTxt:
+        if (ascending) {
+          dados.value.sort((a, b) => a.processo!.compareTo(b.processo));
+        } else {
+          dados.value.sort((a, b) => b.processo!.compareTo(a.processo));
+        }
+        break;
       case KCidade:
         if (ascending) {
           dados.value.sort((a, b) => a.cidade!.compareTo(b.cidade));
@@ -236,6 +243,7 @@ class ProcessoController extends BaseController {
     List<List<dynamic>> rows = [[]];
     List<dynamic> row = [];
 
+    row.add(KProcessoTxt);
     row.add(KCidade);
     row.add(KNucleo);
     row.add(KDetalhamento);
@@ -253,6 +261,7 @@ class ProcessoController extends BaseController {
     rows.add(row);
     for (int i = 0; i < items.length; i++) {
       row = [];
+      row.add(items[i].processo);
       row.add(items[i].cidade);
       row.add(items[i].nucleo);
       row.add(items[i].detalhamentoTemaProcesso);
